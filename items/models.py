@@ -9,10 +9,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-class Item(models.Model): 
+class Item(models.Model):
     name = models.CharField(max_length=50)
     price = models.FloatField()
     available = models.BooleanField(default=True)
+    size = models.CharField(max_length=50, default='')
     image = models.CharField(max_length=500)
     category = models.ManyToManyField(
         Category,
