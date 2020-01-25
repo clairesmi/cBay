@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework', 
+    'rest_framework',
     'django_extensions',
     'items',
     'jwt_auth'
@@ -131,7 +131,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'jwt_auth.authentication.JWTAuthentication',
+        # 'jwt_auth.authentication.JWTAuthentication',
         'rest_framework.authentication.BasicAuthentication'
     ],
 }

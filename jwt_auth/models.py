@@ -5,6 +5,7 @@ from .validators import validate_email
 class User(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(null=True, validators=[validate_email])
+    profile_image = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
         return self.username

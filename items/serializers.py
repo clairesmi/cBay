@@ -7,12 +7,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields  = ('id', 'username', 'profile_image')
+        fields  = ('id', 'username', 'email', 'profile_image')
 
 class NestedItemSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Place
+        model = Item
         fields = ('id', 'name', 'price', 'available', 'image')        
 
 
