@@ -30,7 +30,7 @@ class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ('id', 'owner', 'name', 'price', 'size', 'available', 'image', 'categories')
-        extra_kwargs = {'comments': {'required': False}, 'categories': {'required': False}}
+        extra_kwargs = {'categories': {'required': False}}
 
 
 class PopulatedItemSerializer(ItemSerializer):

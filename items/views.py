@@ -1,11 +1,11 @@
-# from django.shortcuts import render
+# pylint: disable=no-member
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, ListAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT, HTTP_401_UNAUTHORIZED
 from .models import Item, Category
-from .serializers import ItemSerializer, CategorySerializer, PopulatedItemSerializer
+from .serializers import ItemSerializer, CategorySerializer, PopulatedItemSerializer, PopulatedCategorySerializer
 # Create your views here.
 
 class ItemListView(APIView):
