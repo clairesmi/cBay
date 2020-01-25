@@ -9,9 +9,9 @@ verify_ssl = true
 psycopg2-binary = "*"
 djangorestframework = "*"
 django-extensions = "*"
-pyjwt = "*"
 django = "*"
 pylint = "*"
+pyjwt = "*"
 
 [requires]
 python_version = "3.7"
