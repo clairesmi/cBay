@@ -1,5 +1,13 @@
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.js'
+import Router from 'vue-router'
 import App from './components/App.vue'
+import router from './router'
 
-new Vue({ render: (createEl) => createEl(App) }).$mount('#app')
+Vue.use(Router)
+Vue.config.productionTip = false
+
+new Vue({ render: (createEl) => createEl(App),
+  router,
+  components: { App, Router }
+}).$mount('#app')
 

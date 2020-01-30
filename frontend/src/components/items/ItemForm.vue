@@ -1,5 +1,6 @@
 <template>
   <div id="item-form">
+    <router-link to="/">Home</router-link>
     <form>
       <label>Name</label>
       <input type="text" placeholder="Product name"/>
