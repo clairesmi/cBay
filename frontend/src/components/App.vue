@@ -1,14 +1,14 @@
 <template>
 <div id='app'>
-  <router-view ></router-view>
-  <!-- <h1>Home Page</h1> -->
+  <router-view >
+  </router-view>
 </div>
 </template>
 <script>
 import ItemsIndex from './items/ItemsIndex.vue'
+import ItemShow from './items/ItemShow.vue'
 import ItemForm from './items/ItemForm.vue'
 import Home from './common/Home.vue'
-import axios from 'axios'
 import Vue from 'vue'
 import 'style-loader'
 
@@ -16,6 +16,7 @@ export default {
   name: "App",
   components: {
     ItemsIndex,
+    ItemShow,
     ItemForm,
     Home
   }, 

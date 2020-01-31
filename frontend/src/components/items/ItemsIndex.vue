@@ -1,11 +1,12 @@
 <template>
 <div id="items-index">
+  <ItemShow v-bind:items="items"/>
   <router-link to="/">Home</router-link>
   <h1>Listings</h1>
   <div v-for="elem in items" :key="elem.id">
     <h3>{{ elem.name }}</h3>
     <h4>${{ elem.price }}</h4>
-    <img :src=elem.image />
+    <router-link :to="`/items/${elem.id}`"><img :src=elem.image /></router-link>
     <div>{{ elem.available ? 'Available' : 'No longer available' }}</div>
     <div>Size: {{ elem.size }}</div>
     <h5>Categories:</h5>
@@ -21,8 +22,13 @@
 import 'style-loader'
 import axios from 'axios'
 
+import ItemShow from './ItemShow.vue'
+
 export default {
   name: "items-index",
+   components: {
+    ItemShow
+  },
  data () {
   return {
    items: []
@@ -37,7 +43,7 @@ methods: {
     try {
       const response = await axios.get("/api/items")
       this.items = response.data
-      console.log('items index')
+      // console.log('items index')
     }
 
     catch (error) {
