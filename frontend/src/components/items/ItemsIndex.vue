@@ -1,18 +1,17 @@
 <template>
 <div id="items-index">
-  <ItemShow v-bind:items="items"/>
   <router-link to="/">Home</router-link>
   <h1>Listings</h1>
   <div v-for="elem in items" :key="elem.id">
     <h3>{{ elem.name }}</h3>
     <h4>${{ elem.price }}</h4>
-    <router-link :to="`/items/${elem.id}`"><img :src=elem.image /></router-link>
+    <router-link :to="`/items/${elem.id}/`"><img :src=elem.image /></router-link>
     <div>{{ elem.available ? 'Available' : 'No longer available' }}</div>
+    <!-- create boolean condition for availability and grey out if not available  - disable link if not
+    available -->
     <div>Size: {{ elem.size }}</div>
     <h5>Categories:</h5>
     <div v-for="category in elem.categories" :key="category.id"> {{ category.name }}</div>
-    <!-- <h5>Other Items in this category:</h5> -->
-    <!-- <div v-for="item in displayOthersInCategory" :key="item.id">{{ item }}</div> -->
     
   </div>
 </div>
@@ -48,15 +47,7 @@ methods: {
 
     catch (error) {
       console.log(error)
-    }
-  }
-},
-
-
-computed: {
-  displayOthersInCategory() {
-    console.log(this.items.map(elem => elem.categories.map(item => item)))
-    return this.items.map(elem => elem.categories.map(cat => cat.items.map(el => el.name)))
+      }
     }
   }
 }

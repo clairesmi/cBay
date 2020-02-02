@@ -6,7 +6,7 @@ import ItemShow from '../components/items/ItemShow.vue'
 
 const routes = [
   { path: '/items/new', component: ItemForm },
-  { path: '/items/:id', component: ItemShow },
+  { path: '/items/:id/', component: ItemShow },
   { path: '/items', component: ItemsIndex },
   { path: '/', component: Home }
 ]
