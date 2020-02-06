@@ -7,7 +7,7 @@
 <script>
 import ItemsIndex from './items/ItemsIndex.vue'
 import ItemShow from './items/ItemShow.vue'
-import ItemForm from './items/ItemForm.vue'
+import ItemNew from './items/ItemNew.vue'
 import Home from './common/Home.vue'
 import Vue from 'vue'
 import 'style-loader'
@@ -17,7 +17,7 @@ export default {
   components: {
     ItemsIndex,
     ItemShow,
-    ItemForm,
+    ItemNew,
     Home
   }, 
   data() {

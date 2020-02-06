@@ -1,5 +1,6 @@
 <template>
 <div id="item-show">
+  <router-link to="/">Home</router-link>
   <h1>Item Show Page</h1>
 
 <div>
@@ -12,14 +13,18 @@
   <p>Size: {{ item.size }}</p>
   <p>Categories:</p>
   <p v-for="category in item.categories" :key="category.name">{{ category.name }}</p>
-  <p>Other items in this category:</p>
-  <div v-for="item in othersInCategory" :key="item.id"> {{ item.name }}
+  <p>Other items you might like:</p>
+  <div v-for="item in othersInCategory" :key="item.id"> 
+    <p>{{ item.name }}</p>
+    <p>${{ item.price }}</p>
+    <p>Size: {{ item.size }}</p>
     <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image"/></router-link>
   </div>
   
 </div>
 </div>
 <!-- create boolean condition for availability and grey out if not available -->
+<!-- add a location field into the show page with a map -->
   </div>
 </template>
 
