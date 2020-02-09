@@ -11,14 +11,19 @@
       <!-- sep component -->
       <label>Image</label>
       <image-upload v-on:image-updated="item.image = $event"></image-upload>
-      <!-- sep component -->
       <label>Categories</label>
-      <Multiselect 
-      :v-model="value" 
-      :options="categories" 
-      :multiple="true" 
-      :hide-selected="true">
-      </Multiselect>
+        <div>
+          <multiselect @input="handleMultiSelect"
+            v-model="value" 
+            :options="categories"
+            :multiple="true"
+            track-by="name"
+            label="name"
+            placeholder="Select item categories">
+              <template slot="singleLabel" slot-scope="{ option }">{{ option.name }}</template>
+          </multiselect>
+            <pre class="categories-chosen"><code>{{ value ? value.name: null }}</code></pre>
+        </div>
       <button @click="handleSubmit">List your Item</button>
     </form>
   </div>
@@ -45,7 +50,7 @@ export default {
         name: '',
         price: '',
         size: '',
-        available: '',
+        available: true,
         image: '',
       },
       categories: [],
@@ -59,10 +64,11 @@ export default {
 
   methods: {
 
-     async getCategories () {
+     async getCategories() {
        try {
       const res = await axios.get('/api/categories')
-      this.categories = res.data.map(category => category.name)
+      this.categories = res.data
+      // .map(category => category.name)
       // need to find a way to pass the ID into the database 
       console.log(this.categories)
        }
@@ -73,9 +79,18 @@ export default {
 
     // write handle multi-select here 
 
+    handleMultiSelect(value) {
+      // console.log(value)
+      if (!value) {
+        return this.item = {...this.item, categories: []}
+      }
+      this.item = {...this.item, categories: value.map(val => val.id)}
+      // console.log(this.item)
+    },
+
     async handleSubmit () {
-      console.log('submitted')
-      console.log(this.item)
+      // console.log('submitted')
+      // console.log(this.item)
 
       try {
         await axios.post("/api/items", this.item)
@@ -88,5 +103,6 @@ export default {
 }
 </script>
 
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped></style>
 

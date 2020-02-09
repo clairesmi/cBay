@@ -11,6 +11,7 @@ import ItemNew from './items/ItemNew.vue'
 import Home from './common/Home.vue'
 import Vue from 'vue'
 import 'style-loader'
+// import 'postcss-loader'
 
 export default {
   name: "App",
@@ -25,25 +26,7 @@ export default {
       items: [],
       item: {}
     }
-  }, 
-
-//   mounted () {
-//     this.getItems()
-//   },
-
-// methods: {
-//   async getItems () {
-//     try {
-//       const response = await axios.get("/api/items")
-//       this.items = response.data
-//       // console.log(this.items.map(elem => elem.categories.map(item => item.items.map(el => el.name))))
-//     }
-
-//     catch (error) {
-//       console.log(error)
-//     }
-//   }
-// }
+  },
 
 }
 </script>
