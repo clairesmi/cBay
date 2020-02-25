@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 // const { HotModuleReplacementPlugin } = require('webpack')
 
@@ -62,6 +63,9 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     })
+    // new CopyWebpackPlugin([
+    //   { from: './frontend/src/index/html', to: './frontend/dist/index/html' }
+    // ])
     // new webpack.EnvironmentPlugin(['MAPBOX_ACCESS_TOKEN'])
   ]
 }

@@ -13,7 +13,7 @@ class NestedItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ('id', 'name', 'price', 'size', 'available', 'image')
+        fields = ('id', 'name', 'price', 'size', 'available', 'image', 'owner')
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -38,5 +38,6 @@ class PopulatedItemSerializer(ItemSerializer):
     categories = CategorySerializer(many=True)
 
 
-class PopulatedCategorySerializer(CategorySerializer):
-    items = NestedItemSerializer(many=True)
+# class PopulatedCategorySerializer(CategorySerializer):
+
+#     items = NestedItemSerializer(many=True)

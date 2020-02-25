@@ -29,7 +29,7 @@ export default {
       body.append("upload_preset", 'qpedrr5c')
       console.log(files[0])
       const res = await axios.post('https://api.cloudinary.com/v1_1/dpmupgnig/image/upload', body)
-      this.$emit("image-updated", res.data.secure_url)
+      this.$emit("image-upload", res.data.secure_url)
     }
   }
 }

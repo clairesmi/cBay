@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'items',
-    'jwt_auth'
+    'jwt_auth',
+    'frontend'
 ]
 
 MIDDLEWARE = [

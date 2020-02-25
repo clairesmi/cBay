@@ -40,13 +40,13 @@ class ItemDetailView(APIView):
             return Response(updated_item.data)
         return Response(updated_item.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
-    def delete(self, request, pk):
+    def delete(self, _request, pk):
         item = Item.objects.get(pk=pk)
         item.delete()
         return Response(status=HTTP_204_NO_CONTENT)
 
 class CategoryListView(APIView):
-    def get(self, request):
+    def get(self, _request):
         categories = Category.objects.all()
         serialized_categories = CategorySerializer(categories, many=True)
         return Response(serialized_categories.data)

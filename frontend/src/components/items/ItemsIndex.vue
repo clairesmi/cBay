@@ -38,11 +38,11 @@ export default {
   },
 
 methods: {
-  async getItems () {
+  async getItems() {
     try {
-      const response = await axios.get("/api/items")
-      this.items = response.data
-      // console.log('items index')
+      const res = await axios.get("/api/items")
+      this.items = res.data
+      console.log(this.items)
     }
 
     catch (error) {

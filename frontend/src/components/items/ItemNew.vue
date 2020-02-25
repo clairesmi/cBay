@@ -10,7 +10,7 @@
       <input type="text" placeholder="Product size" v-model="item.size"/>
       <!-- sep component -->
       <label>Image</label>
-      <image-upload v-on:image-updated="item.image = $event"></image-upload>
+      <image-upload v-on:image-upload="item.image = $event"></image-upload>
       <label>Categories</label>
         <div>
           <multiselect @input="handleMultiSelect"
@@ -90,7 +90,7 @@ export default {
 
     async handleSubmit () {
       // console.log('submitted')
-      // console.log(this.item)
+      console.log(this.item)
 
       try {
         await axios.post("/api/items", this.item)

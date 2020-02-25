@@ -15,6 +15,7 @@ class Item(models.Model):
     available = models.BooleanField(default=True)
     size = models.CharField(max_length=50, default='')
     image = models.CharField(max_length=500)
+    buyer = models.CharField(max_length=500, default='')
     categories = models.ManyToManyField(
         Category,
         related_name='items',
