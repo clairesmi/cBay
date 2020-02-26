@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "animate.css": "^3.7.2",
     "axios": "^0.19.2",
     "copy-webpack-plugin": "^5.1.1",
     "node-gyp": "^6.1.0",

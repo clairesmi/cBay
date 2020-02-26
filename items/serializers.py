@@ -3,13 +3,22 @@ from django.contrib.auth import get_user_model
 from .models import Item, Category
 User = get_user_model()
 
+class NestedUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'profile_image')
+
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'profile_image')
 
+
 class NestedItemSerializer(serializers.ModelSerializer):
+
+    owner = NestedUserSerializer
 
     class Meta:
         model = Item
@@ -19,6 +28,7 @@ class NestedItemSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
 
     items = NestedItemSerializer(many=True)
+    # owner = NestedUserSerializer()
 
     class Meta:
         model = Category
@@ -27,6 +37,8 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ItemSerializer(serializers.ModelSerializer):
 
+    owner = NestedUserSerializer
+
     class Meta:
         model = Item
         fields = ('id', 'owner', 'name', 'price', 'size', 'available', 'image', 'categories')
@@ -34,10 +46,10 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
 class PopulatedItemSerializer(ItemSerializer):
-    owner = UserSerializer()
+    owner = NestedUserSerializer()
     categories = CategorySerializer(many=True)
 
 
 # class PopulatedCategorySerializer(CategorySerializer):
-
+#     owner = NestedUserSerializer()
 #     items = NestedItemSerializer(many=True)

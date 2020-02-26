@@ -1,5 +1,5 @@
 <template>
-  <div id="item-form">
+  <div id="item-new">
     <router-link to="/">Home</router-link>
     <form>
       <label>Name</label>
@@ -14,7 +14,7 @@
       <label>Categories</label>
         <div>
           <multiselect @input="handleMultiSelect"
-            v-model="value" 
+            v-model="value"
             :options="categories"
             :multiple="true"
             track-by="name"
@@ -38,7 +38,7 @@ import Multiselect from 'vue-multiselect'
 import ImageUpload from './ImageUpload.vue'
 
 export default {
-  name: "item-form",
+  name: "item-new",
 // register imported components here so they can be used in the render/template
   components: {
     ImageUpload, Multiselect

@@ -9,6 +9,8 @@ import ItemsIndex from './items/ItemsIndex.vue'
 import ItemShow from './items/ItemShow.vue'
 import ItemNew from './items/ItemNew.vue'
 import Home from './common/Home.vue'
+import CategoriesIndex from './categories/CategoriesIndex.vue'
+import CategoryShow from './categories/CategoryShow.vue'
 import Vue from 'vue'
 import 'style-loader'
 // import 'postcss-loader'
@@ -16,19 +18,19 @@ import 'style-loader'
 export default {
   name: "App",
   components: {
+    Home,
     ItemsIndex,
     ItemShow,
     ItemNew,
-    Home
+    CategoriesIndex, 
+    CategoryShow
   }, 
-  data() {
-    return {
-      items: [],
-      item: {}
-    }
-  },
+  // data() {
+  //   return {
+  //     items: [],
+  //     item: {}
+  //   }
+  // },
 
 }
 </script>
-
-<style scoped></style>

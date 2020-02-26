@@ -21,22 +21,7 @@ module.exports = {
       { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
       { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'] },
       { test: /\.vue$/, loader: 'vue-loader' }
-      // {
-      //   // ...
-      //   use: [
-      //     // ...
-      //     {
-      //       loader: 'postcss-loader',
-      //       options: {
-      //         ident: 'postcss',
-      //         plugins: [
-      //           require('tailwindcss'),
-      //           require('autoprefixer')
-      //         ]
-      //       }
-      //     }
-      //   ]
-      // }
+
     ]
   },
   devServer: {
