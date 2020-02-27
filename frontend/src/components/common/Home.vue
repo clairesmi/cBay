@@ -17,13 +17,13 @@
         <button id="left-button" @click="handleClick" class="left-button text-2xl m-10"
         :disabled="leftButtonDisabled">previous</button>
 
-        <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.index}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12 border border-black
+        <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.id}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12 border border-black
         flex flex-col justify-center items-center">
           {{this.previousCategory.name}}</div></router-link>
-        <router-link v-if="currentCategory" :to="{ path: `/categories/${this.currentCategory.index}` }"><div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12 border border-black
+        <router-link v-if="currentCategory" :to="{ path: `/categories/${this.currentCategory.id}` }"><div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12 border border-black
         flex flex-col justify-center items-center">
           {{this.currentCategory.name}}</div></router-link>
-        <router-link v-if="nextCategory" :to="{ path: `/categories/${this.nextCategory.index}` }"><div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12 border border-black
+        <router-link v-if="nextCategory" :to="{ path: `/categories/${this.nextCategory.id}` }"><div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12 border border-black
         flex flex-col justify-center items-center">
           {{this.nextCategory.name}}</div></router-link>
 
@@ -70,26 +70,20 @@ export default {
 
     mapCarouselCategories() {
       let i = 1
-      const carouselCategories = this.categories.map((category, index) =>  ({ index: index + 1, name: category.name }))
+      const carouselCategories = this.categories.map((category, index) =>  ({ id: index + 1, index: index, name: category.name }))
       this.carouselCategories = carouselCategories
       this.currentCategory = this.carouselCategories[i]
-      console.log(this.currentCategory.name)
       this.previousCategory = this.carouselCategories[i - 1]
 
       this.nextCategory = this.carouselCategories[i + 1]
-        console.log(this.previousCategory, 'prev')
-        console.log(this.nextCategory.index)
     },
 
     handleClick() {
-      console.log(event.target)
       let timerId
       let iPrevious = this.previousCategory.index
       let iCurrent = this.currentCategory.index
       let iNext = this.nextCategory.index
-      // console.log(iPrevious)
       const currCategory = document.querySelector('.current-category')
-      // console.log(currCategory)
       timerId = setTimeout(function() {
         currCategory.classList.add('animated', 'pulse')
           setTimeout(function() {
