@@ -18,7 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 class NestedItemSerializer(serializers.ModelSerializer):
 
-    owner = NestedUserSerializer
+    owner = NestedUserSerializer()
 
     class Meta:
         model = Item
@@ -37,7 +37,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ItemSerializer(serializers.ModelSerializer):
 
-    owner = NestedUserSerializer
+    owner = NestedUserSerializer()
 
     class Meta:
         model = Item

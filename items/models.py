@@ -30,4 +30,4 @@ class Item(models.Model):
     )
 
     def __str__(self):
-        return f'Item {self.name}'
+        return self.name
