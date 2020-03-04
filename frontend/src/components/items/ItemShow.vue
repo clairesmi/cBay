@@ -23,7 +23,6 @@
   
 </div>
 </div>
-<!-- create boolean condition for availability and grey out if not available -->
 <!-- add a location field into the show page with a map -->
   </div>
 </template>

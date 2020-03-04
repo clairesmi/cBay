@@ -32,5 +32,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password', 'password_confirmation', 'profile_image')
+        fields = ('username', 'email', 'password', 'password_confirmation',
+        'profile_image', 'recommendations')
+        extra_kwargs = {'recommendations': {'required': False}}
         

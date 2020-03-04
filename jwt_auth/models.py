@@ -9,4 +9,22 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class Recommendation(models.Model):
+    text = models.CharField(max_length=200, blank=True)
+    from_user = models.ForeignKey(
+        User,
+        related_name='recommendations',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True)
+    # from_user = models.ForeignKey(
+    #     User,
+    #     related_name='+',
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True)
+
+    def __str__(self):
+        return f'Comment {self.from_user}'
         

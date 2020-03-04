@@ -11,6 +11,9 @@ import ItemNew from './items/ItemNew.vue'
 import Home from './common/Home.vue'
 import CategoriesIndex from './categories/CategoriesIndex.vue'
 import CategoryShow from './categories/CategoryShow.vue'
+import Register from './common/Register.vue'
+import Login from './common/Login.vue'
+import Profile from './common/Profile.vue'
 import Vue from 'vue'
 import 'style-loader'
 // import 'postcss-loader'
@@ -23,7 +26,10 @@ export default {
     ItemShow,
     ItemNew,
     CategoriesIndex, 
-    CategoryShow
+    CategoryShow,
+    Register,
+    Login,
+    Profile
   }, 
   // data() {
   //   return {

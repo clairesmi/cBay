@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_extensions',
     'items',
-    'user_profile',
     'jwt_auth',
     'frontend'
 ]

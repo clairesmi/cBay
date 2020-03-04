@@ -1,19 +1,20 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
+from jwt_auth.models import User
 from .models import Item, Category
-User = get_user_model()
 
+# Populating the user on to other models without including all fields
 class NestedUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'profile_image')
+        fields = ('id', 'username', 'profile_image', 'recommendations')
 
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'profile_image')
+        fields = ('id', 'username', 'email', 'profile_image', 'recommendations')
 
 
 class NestedItemSerializer(serializers.ModelSerializer):
