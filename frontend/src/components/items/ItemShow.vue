@@ -10,6 +10,7 @@
 </div>
 <div>
   <h3>${{ item.price }}</h3>
+  <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`"><p>Posted by {{ item.owner.username }}</p></router-link>
   <p>Size: {{ item.size }}</p>
   <p>Categories:</p>
   <p v-for="category in item.categories" :key="category.name">{{ category.name }}</p>
@@ -42,7 +43,6 @@ export default {
 
   mounted () {
     this.getItem()
-    // console.log(this.otherCategories)
     
   },
 
@@ -52,6 +52,7 @@ export default {
         const res = await axios.get(`/api${this.$route.path}`)
         // console.log(typeof this.$route.params.id)
         this.item = res.data
+        console.log(this.item.owner.id)
         const othersInCategory = this.item.categories.map(category => 
           category.items.filter(item => item.id !== parseInt(this.$route.params.id)))
             this.othersInCategory = othersInCategory[0]

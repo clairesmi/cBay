@@ -14,6 +14,7 @@ import CategoryShow from './categories/CategoryShow.vue'
 import Register from './common/Register.vue'
 import Login from './common/Login.vue'
 import Profile from './common/Profile.vue'
+import ProfileView from './user_interaction/ProfileView.vue'
 import Vue from 'vue'
 import 'style-loader'
 // import 'postcss-loader'
@@ -29,7 +30,8 @@ export default {
     CategoryShow,
     Register,
     Login,
-    Profile
+    Profile, 
+    ProfileView
   }, 
   // data() {
   //   return {

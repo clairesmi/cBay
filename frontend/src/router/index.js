@@ -8,6 +8,7 @@ import CategoryShow from '../components/categories/CategoryShow.vue'
 import Login from '../components/common/Login.vue'
 import Register from '../components/common/Register.vue'
 import Profile from '../components/common/Profile.vue'
+import ProfileView from '../components/user_interaction/ProfileView.vue'
 
 const routes = [
   { path: '/items/new', component: ItemNew },
@@ -17,6 +18,7 @@ const routes = [
   { path: '/categories', component: CategoriesIndex },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
+  { path: '/profile/:id', component: ProfileView },
   { path: '/profile', component: Profile },
   { path: '/', component: Home }
 ]

@@ -14,9 +14,18 @@ class ProfileView(APIView):
 
     def get(self, request):
         # user = User.objects.get(pk=pk)
+        #  ADD VIEW IN FOR ITEMS ADDED BY USER - POPULATE ITEMS ON USER
         user = request.user
         serialized_user = UserSerializer(user)
         return Response(serialized_user.data)
+
+
+class ProfileDetailView(APIView):
+    def get(self, _request, pk):
+        user = User.objects.get(pk=pk)
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
+
 
 class RegisterView(APIView):
 
