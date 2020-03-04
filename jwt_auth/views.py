@@ -12,9 +12,11 @@ User = get_user_model()
 
 class ProfileView(APIView):
 
-    def get(self, _request, pk):
-        user = User.objects.get(pk=pk)
-        return Response(user)
+    def get(self, request):
+        # user = User.objects.get(pk=pk)
+        user = request.user
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
 
 class RegisterView(APIView):
 

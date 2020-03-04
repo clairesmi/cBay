@@ -34,6 +34,7 @@
 <script>
 
 import axios from 'axios'
+import Auth from '../../lib/auth'
 
 export default {
   name: "login",
@@ -48,7 +49,9 @@ export default {
     async handleSubmit() {
       console.log(this.data)
       try {
-        await axios.post('/api/login', this.data)
+        const res = await axios.post('/api/login', this.data)
+        // console.log(res.data.token)
+        Auth.setToken(res.data.token)
         this.$router.push('/profile')
       }
       catch(err) {

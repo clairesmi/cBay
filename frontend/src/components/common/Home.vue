@@ -5,6 +5,9 @@
     <div class="link-wrapper">
     <router-link to="/items">Go to Listings</router-link>
     <router-link to="/items/new">List a new Item</router-link>
+    <router-link to="/register">Sign Up</router-link>
+    <router-link to="/login">Login</router-link>
+    <router-link to="/profile">Your Profile</router-link>
     </div>
     </nav>
     <div class="title-wrapper h-64 flex justify-center flex items-center">
