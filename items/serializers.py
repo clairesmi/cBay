@@ -1,6 +1,6 @@
 from rest_framework import serializers
 # from django.contrib.auth import get_user_model
-from jwt_auth.models import User
+from jwt_auth.models import User, Recommendation, Listing
 from .models import Item, Category
 
 # Populating the user on to other models without including all fields
@@ -8,13 +8,7 @@ class NestedUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'profile_image', 'recommendations')
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'profile_image', 'recommendations')
+        fields = ('id', 'username')
 
 
 class NestedItemSerializer(serializers.ModelSerializer):
@@ -24,6 +18,28 @@ class NestedItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ('id', 'name', 'price', 'size', 'available', 'image', 'owner')
+
+
+class ListingSerializer(serializers.ModelSerializer):
+
+    listed_item = NestedItemSerializer()
+
+    class Meta:
+        model = Listing
+        fields = '__all__'
+
+class RecommendationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Recommendation
+        fields = '__all__'
+
+
+class NestedRecommendationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Recommendation
+        fields = '__all__'
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -46,11 +62,23 @@ class ItemSerializer(serializers.ModelSerializer):
         extra_kwargs = {'categories': {'required': False}}
 
 
+class UserSerializer(serializers.ModelSerializer):
+
+    recommendations = RecommendationSerializer(many=True)
+    listings = ListingSerializer(many=True)
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'profile_image', 'recommendations', 'listings')
+        extra_kwargs = {'listings': {'required': False}}
+
+
+class PopulatedUserSerializer(UserSerializer):
+    recommendations = NestedRecommendationSerializer(many=True)
+    listings = ListingSerializer(many=True)
+    extra_kwargs = {'listings': {'required': False}}
+
+
 class PopulatedItemSerializer(ItemSerializer):
     owner = NestedUserSerializer()
     categories = CategorySerializer(many=True)
-
-
-# class PopulatedCategorySerializer(CategorySerializer):
-#     owner = NestedUserSerializer()
-#     items = NestedItemSerializer(many=True)

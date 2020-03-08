@@ -1,3 +1,4 @@
+
 from django.db import models
 from jwt_auth.models import User
 
@@ -30,4 +31,4 @@ class Item(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return f'Item {self.name}'

@@ -1,5 +1,8 @@
+# pylint: disable=no-member
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+# from items.models import Item
 from .validators import validate_email
 
 class User(AbstractUser):
@@ -18,13 +21,23 @@ class Recommendation(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True)
-    # from_user = models.ForeignKey(
-    #     User,
-    #     related_name='+',
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True)
 
     def __str__(self):
-        return f'Comment {self.from_user}'
-        
+        return f'Recommendation from {self.from_user}'
+
+class Listing(models.Model):
+    listed_item = models.OneToOneField(
+        'items.Item',
+        related_name='listings',
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True)
+    owner = models.ForeignKey(
+        User,
+        related_name='listings',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True)
+
+    def __str__(self):
+        return  f'{self.owner.username}s Listings'
