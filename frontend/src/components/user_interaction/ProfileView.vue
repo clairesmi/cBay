@@ -42,6 +42,7 @@ export default {
       try {
         const res = await axios.get(`/api/${this.$route.path}/`)
         this.user = res.data
+        console.log(this.user)
       }
       catch (err) {
         console.log(err)

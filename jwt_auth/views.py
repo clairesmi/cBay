@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
-from items.serializers import PopulatedUserSerializer, ItemSerializer
+from items.serializers import PopulatedUserSerializer, PopulatedItemSerializer
 from .serializers import UserSerializer
 from items.models import Item
 User = get_user_model()
@@ -30,15 +30,16 @@ class ListingView(APIView):
         user = request.user.id
         print(user)
         items = Item.objects.all().filter(owner=user)
-        serializer = ItemSerializer(items, many=True)
+        serializer = PopulatedItemSerializer(items, many=True)
         return Response(serializer.data, status=200)
 
 
 class ProfileDetailView(APIView):
     def get(self, _request, pk):
         user = User.objects.get(pk=pk)
-        serialized_user = PopulatedUserSerializer(user)
-        return Response(serialized_user.data)
+        items = Item.objects.all().filter(owner=user)
+        serializer = PopulatedItemSerializer(items, many=True)
+        return Response(serializer.data, status=200)
 
 
 class RegisterView(APIView):

@@ -1,4 +1,4 @@
-
+# pylint: disable=no-member,arguments-differ
 from django.db import models
 from jwt_auth.models import User
 

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 # from django.contrib.auth import get_user_model
-from jwt_auth.models import User, Recommendation, Listing
+from jwt_auth.models import User, Recommendation
 from .models import Item, Category
 
 # Populating the user on to other models without including all fields
@@ -19,14 +19,6 @@ class NestedItemSerializer(serializers.ModelSerializer):
         model = Item
         fields = ('id', 'name', 'price', 'size', 'available', 'image', 'owner')
 
-
-class ListingSerializer(serializers.ModelSerializer):
-
-    # listed_item = NestedItemSerializer()
-
-    class Meta:
-        model = Listing
-        fields = '__all__'
 
 class RecommendationSerializer(serializers.ModelSerializer):
 

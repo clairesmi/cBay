@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT
 from jwt_auth.models import User
 from .models import Item, Category
-from .serializers import ItemSerializer, PopulatedItemSerializer, CategorySerializer, ListingSerializer
+from .serializers import ItemSerializer, PopulatedItemSerializer, CategorySerializer
 # Create your views here.
 
 class ItemListView(APIView):
