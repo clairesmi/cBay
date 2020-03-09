@@ -22,8 +22,9 @@
     <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image" alt="category-image"/>
     </router-link>
   </div>
-  <div v-if="isOwner" @click.prevent="handleDelete" class="item-delete">
-    <button>Delete this item</button>
+  <div v-if="isOwner" class="item-delete">
+    <button @click.prevent="handleDelete">Delete this item</button>
+    <router-link :to="`/items/${item.id}/edit`"><button>Edit this item</button></router-link>
   </div>
   
 </div>

@@ -1,5 +1,5 @@
 <template>
-  <div id="item-new">
+  <div id="item-form">
     <router-link to="/">Home</router-link>
     <form>
       <label>Name</label>
@@ -13,8 +13,8 @@
       <image-upload v-on:image-upload="item.image = $event"></image-upload>
       <label>Categories</label>
         <div>
-          <multiselect @input="handleMultiSelect"
-            v-model="value"
+          <multiselect @input="multiSelectInput"
+            v-model="updatedValue"
             :options="categories"
             :multiple="true"
             track-by="name"
@@ -24,81 +24,46 @@
           </multiselect>
             <pre class="categories-chosen"><code>{{ value ? value.name: null }}</code></pre>
         </div>
-      <button @click="handleSubmit">List your Item</button>
+      <button @click="submitClicked">List your Item</button>
     </form>
   </div>
 </template>
 
 <script>
 // import external libraries
-import Vue from 'vue'
-import axios from 'axios'
 import Multiselect from 'vue-multiselect'
 // import child components here 
 import ImageUpload from './ImageUpload.vue'
 
 export default {
-  name: "item-new",
+  name: "item-form",
 // register imported components here so they can be used in the render/template
   components: {
     ImageUpload, Multiselect
   },
-
-  data () {
-    return {
-      item: {
-        name: '',
-        price: '',
-        size: '',
-        available: true,
-        image: '',
-      },
-      categories: [],
-      value: null
-    }
+  props: {
+    item: Object,
+    categories: Array,
+    value: Array
   },
 
-  mounted () {
-    this.getCategories()
+  data() {
+    return {
+      // make a copy of value which can be emitted to the parent
+      updatedValue: this.$props.value
+    }
   },
 
   methods: {
-
-     async getCategories() {
-       try {
-      const res = await axios.get('/api/categories')
-      this.categories = res.data
-       }
-       catch (err) {
-         console.log(err)
-       }
+    submitClicked() {
+      this.$emit("submit-clicked")
     },
-
-    handleMultiSelect(value) {
-      // console.log(value)
-      if (!value) {
-        return this.item = {...this.item, categories: []}
-      }
-      this.item = {...this.item, categories: value.map(val => val.id)}
-      // console.log(this.item)
-    },
-
-    async handleSubmit () {
-      // console.log('submitted')
-      console.log(this.item)
-
-      try {
-        await axios.post("/api/items", this.item)
-        this.$router.push('/profile')
-      }
-      catch (error) {
-        console.log(error)
-      }
+    multiSelectInput() {
+      //  emit the new values from the multi-select to the parent 
+      this.$emit("multi-select-input", this.updatedValue)
     }
   }
+
 }
+
 </script>
-
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
-<style scoped></style>
-

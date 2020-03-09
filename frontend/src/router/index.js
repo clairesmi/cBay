@@ -3,6 +3,7 @@ import Home from '../components/common/Home.vue'
 import ItemsIndex from '../components/items/ItemsIndex.vue'
 import ItemNew from '../components/items/ItemNew.vue'
 import ItemShow from '../components/items/ItemShow.vue'
+import ItemEdit from '../components/items/ItemEdit.vue'
 import CategoriesIndex from '../components/categories/CategoriesIndex.vue'
 import CategoryShow from '../components/categories/CategoryShow.vue'
 import Login from '../components/common/Login.vue'
@@ -12,6 +13,7 @@ import ProfileView from '../components/user_interaction/ProfileView.vue'
 
 const routes = [
   { path: '/items/new', component: ItemNew },
+  { path: '/items/:id/edit', component: ItemEdit },
   { path: '/items/:id/', component: ItemShow },
   { path: '/items', component: ItemsIndex },
   { path: '/categories/:id/', component: CategoryShow },
