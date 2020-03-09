@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 # import django.contrib.auth.password_validation as validations
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
+from items.serializers import ListingSerializer
 User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
@@ -29,10 +30,12 @@ class UserSerializer(serializers.ModelSerializer):
         data['password'] = make_password(password)
         return data
 
+    # listed_item = ListingSerializer(many=True)
 
     class Meta:
+
         model = User
         fields = ('username', 'email', 'password', 'password_confirmation',
-        'profile_image', 'recommendations', 'listings')
-        extra_kwargs = {'recommendations': {'required': False}, 'listings': {'required': False}}
+        'profile_image', 'recommendations')
+        extra_kwargs = {'recommendations': {'required': False}}
         

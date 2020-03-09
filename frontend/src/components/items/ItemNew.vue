@@ -70,7 +70,7 @@ export default {
       this.categories = res.data
       // .map(category => category.name)
       // need to find a way to pass the ID into the database 
-      console.log(this.categories)
+      // console.log(this.categories)
        }
        catch (err) {
          console.log(err)
@@ -94,6 +94,7 @@ export default {
 
       try {
         await axios.post("/api/items", this.item)
+        this.$router.push('/profile')
       }
       catch (error) {
         console.log(error)

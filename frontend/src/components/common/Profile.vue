@@ -6,9 +6,11 @@
       <h1>Hello {{ user.username }}</h1>
       <p>Registered email: {{ user.email }}</p>
       <img :src="user.profile_image">
-        <h2>Recommendations from your customers</h2>
+        <h2>Reviews from your customers</h2>
       <div v-for="recommendation in user.recommendations" :key="recommendation.id">
       </div>
+      <h2>Your Listings</h2>
+      <div v-for="listing in user.listings" :key="listing.id"></div>
     </div>
     
   </div>

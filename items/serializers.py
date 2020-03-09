@@ -22,7 +22,7 @@ class NestedItemSerializer(serializers.ModelSerializer):
 
 class ListingSerializer(serializers.ModelSerializer):
 
-    listed_item = NestedItemSerializer()
+    # listed_item = NestedItemSerializer()
 
     class Meta:
         model = Listing
@@ -54,7 +54,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ItemSerializer(serializers.ModelSerializer):
 
-    owner = NestedUserSerializer()
+    owner = NestedUserSerializer
 
     class Meta:
         model = Item
@@ -65,18 +65,17 @@ class ItemSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
 
     recommendations = RecommendationSerializer(many=True)
-    listings = ListingSerializer(many=True)
+    # listed_item = ListingSerializer(many=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'profile_image', 'recommendations', 'listings')
-        extra_kwargs = {'listings': {'required': False}}
+        fields = ('id', 'username', 'email', 'profile_image', 'recommendations')
+
 
 
 class PopulatedUserSerializer(UserSerializer):
     recommendations = NestedRecommendationSerializer(many=True)
-    listings = ListingSerializer(many=True)
-    extra_kwargs = {'listings': {'required': False}}
+    # listed_item = ListingSerializer(many=True)
 
 
 class PopulatedItemSerializer(ItemSerializer):

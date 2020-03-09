@@ -8,6 +8,7 @@
     <router-link to="/register">Sign Up</router-link>
     <router-link to="/login">Login</router-link>
     <router-link to="/profile">Your Profile</router-link>
+    <a @click="handleLogout">Logout</a>
     </div>
     </nav>
     <div class="title-wrapper h-64 flex justify-center flex items-center">
@@ -39,6 +40,7 @@
 <script>
 
 import axios from 'axios'
+import Auth from '../../lib/auth'
 import 'animate.css'
 
 export default {
@@ -116,6 +118,10 @@ export default {
         this.previousCategory.index === 0 ? this.leftButtonDisabled = true : 
           this.leftButtonDisabled = false  
 
+    },
+    handleLogout() {
+      Auth.logout()
+      this.$router.push('/items')
     }
   }
 }

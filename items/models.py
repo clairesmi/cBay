@@ -23,7 +23,7 @@ class Item(models.Model):
         blank=True
     )
     owner = models.ForeignKey(
-        User,
+        'jwt_auth.User',
         related_name='items',
         on_delete=models.CASCADE,
         null=True,

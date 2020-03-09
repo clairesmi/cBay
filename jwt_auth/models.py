@@ -1,14 +1,19 @@
-# pylint: disable=no-member
-
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # from items.models import Item
 from .validators import validate_email
 
+
 class User(AbstractUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(null=True, validators=[validate_email])
     profile_image = models.CharField(max_length=500, blank=True)
+    # listed_item = models.ForeignKey(
+    #     'items.Item',
+    #     related_name='users',
+    #     on_delete=models.DO_NOTHING,
+    #     null=True,
+    #     blank=True)
 
     def __str__(self):
         return self.username
@@ -29,7 +34,7 @@ class Listing(models.Model):
     listed_item = models.OneToOneField(
         'items.Item',
         related_name='listings',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         null=True,
         blank=True)
     owner = models.ForeignKey(

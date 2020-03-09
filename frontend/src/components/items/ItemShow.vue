@@ -6,7 +6,7 @@
 <div>
 <h2>{{ item.name }}</h2>
 <div>
-  <img :src=item.image />
+  <img :src=item.image alt="item-image" />
 </div>
 <div>
   <h3>${{ item.price }}</h3>
@@ -19,7 +19,8 @@
     <p>{{ item.name }}</p>
     <p>${{ item.price }}</p>
     <p>Size: {{ item.size }}</p>
-    <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image"/></router-link>
+    <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image" alt="category-image"/>
+    </router-link>
   </div>
   
 </div>
