@@ -8,7 +8,7 @@ class NestedUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username')
+        fields = ('id', 'username', 'profile_image', 'recommendations')
 
 
 class NestedItemSerializer(serializers.ModelSerializer):
@@ -41,7 +41,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('id', 'name', 'items')
+        fields = ('id', 'name', 'category_image', 'items')
 
 
 class ItemSerializer(serializers.ModelSerializer):

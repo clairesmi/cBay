@@ -22,6 +22,9 @@
     <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image" alt="category-image"/>
     </router-link>
   </div>
+  <div v-if="isOwner" @click.prevent="handleDelete" class="item-delete">
+    <button>Delete this item</button>
+  </div>
   
 </div>
 </div>
@@ -32,6 +35,7 @@
 <script>
 
 import axios from 'axios'
+import Auth from '../../lib/auth'
 
 export default {
   name: "item-show",
@@ -42,8 +46,9 @@ export default {
     }
   },
 
-  mounted () {
-    this.getItem()
+  async mounted () {
+    await this.getItem()
+    this.isOwner()
     
   },
 
@@ -53,7 +58,7 @@ export default {
         const res = await axios.get(`/api${this.$route.path}`)
         // console.log(typeof this.$route.params.id)
         this.item = res.data
-        console.log(this.item.owner.id)
+        // console.log(this.item.owner.id)
         const othersInCategory = this.item.categories.map(category => 
           category.items.filter(item => item.id !== parseInt(this.$route.params.id)))
             this.othersInCategory = othersInCategory[0]
@@ -62,6 +67,22 @@ export default {
         console.log(error)
       }
     },
+    isOwner() {
+      if (!this.item.owner) return null
+      console.log(Auth.getPayload().sub === this.item.owner.id)
+      return Auth.getPayload().sub === this.item.owner.id
+    },
+    async handleDelete() {
+      try {
+      await axios.delete(`/api${this.$route.path}`, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+          })
+          this.$router.push('/items')
+        }
+        catch (err) {
+        console.log(err)
+        }
+      }
 
     }
   }

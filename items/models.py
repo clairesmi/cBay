@@ -6,6 +6,7 @@ from jwt_auth.models import User
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    category_image = models.CharField(max_length=500, default='')
 
     def __str__(self):
         return self.name
