@@ -2,6 +2,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .validators import validate_email
+# from items.models import Item
 
 
 class User(AbstractUser):

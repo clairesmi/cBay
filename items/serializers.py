@@ -17,7 +17,7 @@ class NestedItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ('id', 'name', 'price', 'size', 'available', 'image', 'owner')
+        fields = ('id', 'name', 'price', 'size', 'available', 'image', 'owner', 'basket')
 
 
 class RecommendationSerializer(serializers.ModelSerializer):
@@ -50,7 +50,7 @@ class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ('id', 'owner', 'name', 'price', 'size', 'available', 'image', 'categories')
+        fields = ('id', 'owner', 'name', 'price', 'size', 'available', 'image', 'categories', 'basket')
         extra_kwargs = {'categories': {'required': False}}
 
 

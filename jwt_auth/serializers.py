@@ -35,6 +35,6 @@ class UserSerializer(serializers.ModelSerializer):
 
         model = User
         fields = ('username', 'email', 'password', 'password_confirmation',
-        'profile_image', 'recommendations')
-        extra_kwargs = {'recommendations': {'required': False}}
+        'profile_image', 'recommendations', 'basket')
+        extra_kwargs = {'recommendations': {'required': False}, 'basket': {'required': False}}
         

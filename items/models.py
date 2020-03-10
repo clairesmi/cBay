@@ -30,6 +30,14 @@ class Item(models.Model):
         null=True,
         blank=True
     )
+    basket = models.ForeignKey(
+        User,
+        related_name='basket_items',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return f'Item {self.name}'
+

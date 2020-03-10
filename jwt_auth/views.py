@@ -7,9 +7,9 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
 from django.conf import settings
 import jwt
-from items.serializers import PopulatedUserSerializer, PopulatedItemSerializer
-from .serializers import UserSerializer
+from items.serializers import PopulatedUserSerializer, PopulatedItemSerializer, NestedItemSerializer
 from items.models import Item
+from .serializers import UserSerializer
 User = get_user_model()
 
 class ProfileView(APIView):
