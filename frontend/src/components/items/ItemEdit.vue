@@ -59,9 +59,11 @@ export default {
       async handleSubmit() {
         // event.preventDefault()
         const itemId = this.$route.params.id
+        const item = {... this.item, owner: this.item.owner.id}
+        this.item = item
           console.log(this.item)
         try {
-          await axios.put(`/api/items/${itemId}/`, this.item)
+          await axios.patch(`/api/items/${itemId}/`, this.item)
           this.$router.push('/profile')
         }
           catch (error) {

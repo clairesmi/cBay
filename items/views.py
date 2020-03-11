@@ -35,8 +35,8 @@ class ItemDetailView(APIView):
         serialized_item = PopulatedItemSerializer(item)
         return Response(serialized_item.data)
 
-    def put(self, request, pk):
-        request.data['owner'] = request.user.id
+    def patch(self, request, pk):
+        # request.data['owner'] = request.user.id
         item = Item.objects.get(pk=pk)
         updated_item = ItemSerializer(item, data=request.data)
         if updated_item.is_valid():

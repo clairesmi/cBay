@@ -22,6 +22,9 @@
     <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image" alt="category-image"/>
     </router-link>
   </div>
+  <div v-if="!isOwner" class="add-to-basket-wrapper">
+    <button @click.prevent="addToBasket">Add to basket</button>
+  </div>
   <div v-if="isOwner" class="item-delete">
     <button @click.prevent="handleDelete">Delete this item</button>
     <router-link :to="`/items/${item.id}/edit`"><button>Edit this item</button></router-link>
@@ -43,13 +46,14 @@ export default {
   data () {
     return {
     item: {},
-    othersInCategory: []
+    othersInCategory: [],
+    isOwner: false
     }
   },
 
   async mounted () {
     await this.getItem()
-    this.isOwner()
+    this.isOwnerCheck()
     
   },
 
@@ -68,11 +72,31 @@ export default {
         console.log(error)
       }
     },
-    isOwner() {
+    // check if the logged in user is also the owner of the posted item 
+    // so they can be permitted to edit or delete
+    isOwnerCheck() {
       if (!this.item.owner) return null
-      console.log(Auth.getPayload().sub === this.item.owner.id)
-      return Auth.getPayload().sub === this.item.owner.id
+      // console.log(Auth.getPayload().sub === this.item.owner.id)
+      this.isOwner = Auth.getPayload().sub === this.item.owner.id
+      console.log(this.isOwner)
     },
+
+    async addToBasket() {
+      const userID = Auth.getPayload().sub
+      // add user ID to basket field on item
+      const owner = this.item.owner
+      const item = {...this.item, basket: userID, available: false, owner: this.item.owner.id, 
+      categories: this.item.categories.map(category => category.id) }
+      this.item = item
+      try {
+      await axios.patch(`/api${this.$route.path}/`, this.item)
+      this.$router.push('/items')
+      }
+      catch (err) {
+        console.log(err)
+      }
+    },
+
     async handleDelete() {
       try {
       await axios.delete(`/api${this.$route.path}`, {
