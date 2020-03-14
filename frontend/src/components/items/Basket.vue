@@ -1,11 +1,28 @@
 <template>
-<div id="basket">
+<div id="basket"  v-if="items">
   <!-- remember to add in delete from basket (remove user id from item) -->
   <!-- TOTAL (USE REDUCE FOR THIS)-->
-  <!-- PAY -->
+  <!-- PAY - empty basket and remove items from item index, create a field to store 'purchased' items-->
   <h1>What's in your basket?</h1>
-  <div class="basket-wrapper">
-
+  <div class="basket-wrapper" v-for="item in items" :key="item.id">
+      <div class="item-info">
+        <h2>{{ item.name }}</h2>
+        <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image"/>
+        </router-link>
+        <p>${{ item.price }}</p>
+        <p>Size: {{ item.size }}</p>
+        <p v-if="item.owner">Listed by: {{ item.owner.username }}</p>
+        <button @click="removeCheck">Remove from basket</button>
+    </div>
+  <div v-if="modalShow">
+    <div class="check-modal">
+      <div class="modal-text">
+      <p>Are you sure you want to remove this item from your basket?</p>
+      <button @click="handleRemove" :id=item.id>Yes</button>
+      <button @click="handleRemove">No</button>
+      </div>
+    </div>
+  </div>
   </div>
   </div>
 </template>
@@ -17,7 +34,9 @@ export default {
   name: "basket",
   data() {
     return {
-      items: {}
+      items: {},
+      modalShow: false,
+      item: {}
     }
   },
   mounted() {
@@ -28,10 +47,58 @@ export default {
       const res = await axios.get('/api/basket')
       console.log(res.data)         
       this.items = res.data
+    },
+    removeCheck() {
+      this.modalShow = !this.modalShow
+      console.log(this.modalShow)
+    },
+    async handleRemove() {
+      //  if yes, use item ID to patch to update it with basket null 
+      console.log(event.target)
+      if (event.target.innerText === 'No') {
+        this.modalShow = !this.modalShow }
+      //   } else {  
+      // const owner = this.item.owner
+      // const item = {...this.item, basket: null, available: true, owner: owner.id, 
+      // categories: this.item.categories.map(category => category.id) }
+      // this.item = item
+      // try {
+      // await axios.patch(`/api/item/${this.item.id}/`, this.item)
+      // this.$router.push('/items')
+      // }
+      // catch (err) {
+      //   console.log(err)
+      // }
+      
+      //   }
     }
   }
 }
 </script>
 <style scoped>
-
+img {
+  height: 200px;
+  width: 200px;
+}
+.check-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  /* background: beige; */
+  /* opacity: 0.2; */
+  position: fixed;
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* z-index: 1;  */
+}
+.modal-text {
+  background-color: green;
+  width: 50vw;
+  height: 50vh;
+  /* z-index: 2; */
+  opacity: 1;
+}
 </style>

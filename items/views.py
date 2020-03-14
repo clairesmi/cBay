@@ -67,5 +67,5 @@ class BasketListView(APIView):
         # print(user)
         basket = Item.objects.all().filter(basket=user)
         # print(basket)
-        serializer = ItemSerializer(basket, many=True)
+        serializer = PopulatedItemSerializer(basket, many=True)
         return Response(serializer.data)
