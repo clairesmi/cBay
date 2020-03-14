@@ -16,6 +16,7 @@ import Register from './common/Register.vue'
 import Login from './common/Login.vue'
 import Profile from './common/Profile.vue'
 import ProfileView from './user_interaction/ProfileView.vue'
+import Basket from './items/Basket.vue'
 import Vue from 'vue'
 import 'style-loader'
 // import 'postcss-loader'
@@ -33,7 +34,8 @@ export default {
     Register,
     Login,
     Profile, 
-    ProfileView
+    ProfileView,
+    Basket
   },
 
 }

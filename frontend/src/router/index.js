@@ -10,8 +10,10 @@ import Login from '../components/common/Login.vue'
 import Register from '../components/common/Register.vue'
 import Profile from '../components/common/Profile.vue'
 import ProfileView from '../components/user_interaction/ProfileView.vue'
+import Basket from '../components/items/Basket.vue'
 
 const routes = [
+  { path: '/basket', component: Basket },
   { path: '/items/new', component: ItemNew },
   { path: '/items/:id/edit', component: ItemEdit },
   { path: '/items/:id/', component: ItemShow },

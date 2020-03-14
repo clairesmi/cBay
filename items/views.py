@@ -60,3 +60,12 @@ class CategoryDetailView(APIView):
         category = Category.objects.get(pk=pk)
         serialized_category = CategorySerializer(category)
         return Response(serialized_category.data)
+
+class BasketListView(APIView):
+    def get(self, request):
+        user = request.user.id
+        # print(user)
+        basket = Item.objects.all().filter(basket=user)
+        # print(basket)
+        serializer = ItemSerializer(basket, many=True)
+        return Response(serializer.data)
