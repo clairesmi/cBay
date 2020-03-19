@@ -51,8 +51,7 @@ methods: {
   async getItems() {
     try {
       const res = await axios.get("/api/items")
-      this.items = res.data
-      console.log(this.items)
+      this.items = res.data.sort((a, b) => b.available - a.available)
     }
 
     catch (error) {
@@ -60,15 +59,6 @@ methods: {
       }
     }
   },
-      computed: {
-          isDisabled() {
-      console.log(this.items.filter(item => !item.available))
-      return this.items.filter(item => {
-        return item.available === false
-        })
-      // return true
-      }
-    }
 }
 
 </script>

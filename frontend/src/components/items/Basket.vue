@@ -1,25 +1,29 @@
 <template>
 <div id="basket"  v-if="items">
-  <!-- remember to add in delete from basket (remove user id from item) -->
   <!-- TOTAL (USE REDUCE FOR THIS)-->
-  <!-- PAY - empty basket and remove items from item index, create a field to store 'purchased' items-->
+  <!-- PAY - empty basket and remove items from item index, create a field to store 'purchased' items
+  which can be displayed on users profile-->
+  <div class="basket-headers">
   <h1>What's in your basket?</h1>
+  <h2>Total: </h2>
+  <button>Go to checkout</button>
+  </div>
   <div class="basket-wrapper" v-for="item in items" :key="item.id">
       <div class="item-info">
-        <h2>{{ item.name }}</h2>
+        <h3>{{ item.name }}</h3>
         <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image"/>
         </router-link>
         <p>${{ item.price }}</p>
         <p>Size: {{ item.size }}</p>
         <p v-if="item.owner">Listed by: {{ item.owner.username }}</p>
-        <button @click="removeCheck">Remove from basket</button>
+        <button @click="removeCheck" :id="item.id">Remove from basket</button>
     </div>
   <div v-if="modalShow">
     <div class="check-modal">
       <div class="modal-text">
       <p>Are you sure you want to remove this item from your basket?</p>
       <button @click="handleRemove" :id=item.id>Yes</button>
-      <button @click="handleRemove">No</button>
+      <button @click="handleRemove" :id=item.id>No</button>
       </div>
     </div>
   </div>
@@ -48,32 +52,38 @@ export default {
       console.log(res.data)         
       this.items = res.data
     },
-    removeCheck() {
+    async removeCheck() {
+      const res = await axios.get(`api/items/${event.target.id}/`) 
+      console.log(res.data)
+      this.item = res.data
       this.modalShow = !this.modalShow
       console.log(this.modalShow)
     },
     async handleRemove() {
       //  if yes, use item ID to patch to update it with basket null 
-      console.log(event.target)
+      // console.log(event.target)
       if (event.target.innerText === 'No') {
-        this.modalShow = !this.modalShow }
-      //   } else {  
-      // const owner = this.item.owner
-      // const item = {...this.item, basket: null, available: true, owner: owner.id, 
-      // categories: this.item.categories.map(category => category.id) }
-      // this.item = item
-      // try {
-      // await axios.patch(`/api/item/${this.item.id}/`, this.item)
-      // this.$router.push('/items')
-      // }
-      // catch (err) {
-      //   console.log(err)
-      // }
-      
-      //   }
-    }
+        this.modalShow = !this.modalShow 
+        // console.log(event.target.id)
+        }
+      else {  
+      const owner = this.item.owner
+      const item = {...this.item, basket: null, available: true, owner: owner.id, 
+      categories: this.item.categories.map(category => category.id)}
+       this.item = item
+      try {
+      await axios.patch(`/api/items/${this.item.id}/`, this.item)
+      this.$router.push('/items')
+      }
+      catch (err) {
+        console.log(err)
+        }
+      }
+    },
   }
 }
+
+
 </script>
 <style scoped>
 img {
