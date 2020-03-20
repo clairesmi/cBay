@@ -1,8 +1,5 @@
 <template>
 <div id="basket"  v-if="items">
-  <!-- TOTAL (USE REDUCE FOR THIS)-->
-  <!-- PAY - empty basket and remove items from item index, create a field to store 'purchased' items
-  which can be displayed on users profile-->
   <div class="basket-headers">
   <h1>What's in your basket?</h1>
   <h2>Total: ${{ total }}</h2>
@@ -85,7 +82,7 @@ export default {
     },
     calculateTotal() {
       const priceArray = this.items.map(item => item.price)
-      this.total = priceArray.reduce((total, current) => total + current)
+      this.total = priceArray.reduce((total, current) => total + current, 0).toFixed(2)
     }
   }
 }

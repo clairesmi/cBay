@@ -8,10 +8,12 @@
       <div class="listings-body">
         <img :src=userListings[0].owner.profile_image alt="profile-image"/>
         <div v-for="listing in userListings" :key="listing.id">
-        <p>{{ listing.name }}</p>
-        <router-link :to="`/items/${listing.id}`"><img :src=listing.image /></router-link>
-        <p>£{{ listing.price }}</p>
-        <p>Size {{ listing.size }}</p>
+          <div v-if="listing.available">
+            <p>{{ listing.name }}</p>
+            <router-link :to="`/items/${listing.id}`"><img :src=listing.image /></router-link>
+            <p>£{{ listing.price }}</p>
+            <p>Size {{ listing.size }}</p>
+          </div>
         </div>
           <h2>Customer Reviews</h2>
         <div v-for="review in userListings[0].owner.recommendations" :key="review.id">

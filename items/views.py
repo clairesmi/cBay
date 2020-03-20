@@ -69,3 +69,12 @@ class BasketListView(APIView):
         # print(basket)
         serializer = PopulatedItemSerializer(basket, many=True)
         return Response(serializer.data)
+
+class PurchasedListView(APIView):
+    def get(self, request):
+        user = request.user.id
+        # print (user)
+        purchased = Item.objects.all().filter(purchased=user)
+        # print(purchased)
+        serializer = PopulatedItemSerializer(purchased, many=True)
+        return Response(serializer.data)

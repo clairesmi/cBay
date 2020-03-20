@@ -9,16 +9,27 @@
         <h2>Reviews from your customers</h2>
       <div v-for="review in user.recommendations" :key="review.id">
       </div>
+      <div class="listings-wrapper">
       <h2>Your Listings</h2>
-      <div v-for="listing in listings" :key="listing.id">
-        <p>{{ listing.name }}</p>
-        <router-link :to="`/items/${listing.id}`"><img :src=listing.image /></router-link>
-        <p>£{{ listing.price }}</p>
-        <p>Size: {{ listing.size }}</p>
-        <p>{{ listing.available ? 'Available' : 'Sold' }}</p>
+        <div v-for="listing in listings" :key="listing.id">
+          <p>{{ listing.name }}</p>
+          <router-link :to="`/items/${listing.id}`"><img :src=listing.image /></router-link>
+          <p>£{{ listing.price }}</p>
+          <p>Size: {{ listing.size }}</p>
+          <p>{{ listing.available ? 'Available' : 'Sold' }}</p>
+        </div>
+      </div>
+      <div class="purchased-items-wrapper">
+        <h2>Your Purchases</h2>
+          <div v-for="purchase in purchasedItems" :key="purchase.id">
+            <p>{{ purchase.name }}</p>
+            <img :src=purchase.image />
+            <p>£{{ purchase.price }}</p>
+            <p>Size: {{ purchase.size }}</p>
+            <router-link :to="`/profile/${purchase.owner.id}/`"><p>Sold by: {{ purchase.owner.username }}</p></router-link>
+          </div>
       </div>
     </div>
-    
   </div>
 </div>
   
@@ -33,13 +44,15 @@ export default {
   data () {
     return {
     user: null,
-    listings: []
+    listings: [],
+    purchasedItems: []
     }
   },
 
-  mounted() {
-    this.getUser()
+  async mounted() {
+    await this.getUser()
     this.getListings()
+    this.getPurchasedItems()
   },
 
   methods: {
@@ -49,7 +62,6 @@ export default {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
     this.user = res.data
-    // console.log(this.user)
       }
       catch (err) {
         console.log(err)
@@ -62,6 +74,15 @@ export default {
         })
         this.listings = res.data
         console.log(this.listings)
+      }
+      catch (err) {
+        console.log(err)
+      }
+    },
+    async getPurchasedItems() {
+      try {
+        const res = await axios.get('api/purchased')
+        this.purchasedItems = res.data
       }
       catch (err) {
         console.log(err)
