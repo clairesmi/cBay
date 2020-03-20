@@ -37,7 +37,13 @@ class Item(models.Model):
         null=True,
         blank=True
     )
+    purchased = models.ForeignKey(
+        User,
+        related_name='purchased_items',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return f'Item {self.name}'
-

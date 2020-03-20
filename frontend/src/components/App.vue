@@ -17,6 +17,7 @@ import Login from './common/Login.vue'
 import Profile from './common/Profile.vue'
 import ProfileView from './user_interaction/ProfileView.vue'
 import Basket from './items/Basket.vue'
+import Checkout from './items/Checkout.vue'
 import Vue from 'vue'
 import 'style-loader'
 // import 'postcss-loader'
@@ -35,7 +36,8 @@ export default {
     Login,
     Profile, 
     ProfileView,
-    Basket
+    Basket,
+    Checkout
   },
 
 }

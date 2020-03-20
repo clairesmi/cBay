@@ -5,8 +5,8 @@
   which can be displayed on users profile-->
   <div class="basket-headers">
   <h1>What's in your basket?</h1>
-  <h2>Total: </h2>
-  <button>Go to checkout</button>
+  <h2>Total: ${{ total }}</h2>
+  <router-link to="/checkout"><button>Go to checkout</button></router-link>
   </div>
   <div class="basket-wrapper" v-for="item in items" :key="item.id">
       <div class="item-info">
@@ -40,24 +40,27 @@ export default {
     return {
       items: {},
       modalShow: false,
-      item: {}
+      item: {},
+      total: null
     }
   },
-  mounted() {
-    this.getBasket()
+
+  async mounted() {
+    await this.getBasket()
+    this.calculateTotal()
   },
   methods: {
     async getBasket() {
       const res = await axios.get('/api/basket')
-      console.log(res.data)         
+      // console.log(res.data)         
       this.items = res.data
     },
     async removeCheck() {
       const res = await axios.get(`api/items/${event.target.id}/`) 
-      console.log(res.data)
+      // console.log(res.data)
       this.item = res.data
       this.modalShow = !this.modalShow
-      console.log(this.modalShow)
+      // console.log(this.modalShow)
     },
     async handleRemove() {
       //  if yes, use item ID to patch to update it with basket null 
@@ -80,6 +83,10 @@ export default {
         }
       }
     },
+    calculateTotal() {
+      const priceArray = this.items.map(item => item.price)
+      this.total = priceArray.reduce((total, current) => total + current)
+    }
   }
 }
 
