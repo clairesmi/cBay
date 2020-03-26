@@ -70,7 +70,7 @@ export default {
           console.log(error)
         }
       },
-      //  updateValue can be used from the child component
+      //  updatedValue can be used from the child component
       handleMultiSelect(updatedValue) {
         console.log(updatedValue)
         if (!updatedValue) {

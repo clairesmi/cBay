@@ -83,7 +83,6 @@ export default {
 
     async addToBasket() {
       const userID = Auth.getPayload().sub
-      // add user ID to basket field on item
       const owner = this.item.owner
       const item = {...this.item, basket: userID, available: false, owner: this.item.owner.id, 
       categories: this.item.categories.map(category => category.id) }

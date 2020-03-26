@@ -21,15 +21,15 @@
         <button id="left-button" @click="handleClick" class="left-button text-2xl m-10"
         :disabled="leftButtonDisabled">previous</button>
 
-        <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.id}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12 border border-black
+        <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.id}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
         flex flex-col justify-center items-center">
-          {{this.previousCategory.name}}</div></router-link>
-        <router-link v-if="currentCategory" :to="{ path: `/categories/${this.currentCategory.id}` }"><div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12 border border-black
+          <img :src=this.previousCategory.image :alt=previousCategory.name class="h-48 w-12/12 border border-black" /></div></router-link>
+        <router-link v-if="currentCategory" :to="{ path: `/categories/${this.currentCategory.id}` }"><div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12
         flex flex-col justify-center items-center">
-          {{this.currentCategory.name}}</div></router-link>
-        <router-link v-if="nextCategory" :to="{ path: `/categories/${this.nextCategory.id}` }"><div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12 border border-black
+          <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12 border border-black" /></div></router-link>
+        <router-link v-if="nextCategory" :to="{ path: `/categories/${this.nextCategory.id}` }"><div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12
         flex flex-col justify-center items-center">
-          {{this.nextCategory.name}}</div></router-link>
+          <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12 border border-black" /></div></router-link>
 
         <button id="right-button" @click="handleClick" class="right-button text-2xl m-10"
         :disabled="rightButtonDisabled">next</button>
@@ -66,7 +66,7 @@ export default {
       try {
       const res = await axios.get("api/categories")
       this.categories = res.data
-      // console.log(this.categories)
+      console.log(this.categories)
       }
       catch(err) {
         console.log(err)
@@ -75,12 +75,17 @@ export default {
 
     mapCarouselCategories() {
       let i = 1
-      const carouselCategories = this.categories.map((category, index) =>  ({ id: index + 1, index: index, name: category.name }))
+      const carouselCategories = this.categories.map((category, index) =>  ({ id: index + 1, 
+      index: index, 
+      name: category.name, 
+      image: category.category_image }))
+
       this.carouselCategories = carouselCategories
       this.currentCategory = this.carouselCategories[i]
       this.previousCategory = this.carouselCategories[i - 1]
-
       this.nextCategory = this.carouselCategories[i + 1]
+
+      console.log(this.previousCategory)
     },
 
     handleClick() {
@@ -97,8 +102,6 @@ export default {
           }, 700)
         
         }, 100)
-      // this.previousCategory('animated pulse')
-      // console.log(iNext)
 
     if (event.target.id === 'right-button' && this.currentCategory.index < this.carouselCategories.length - 1 && this.nextCategory.index !== this.carouselCategories.length - 1) {
       this.currentCategory = this.carouselCategories[iCurrent += 1]

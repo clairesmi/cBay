@@ -3,42 +3,48 @@
     "model": "items.category",
     "pk": 1,
     "fields": {
-      "name": "dresses"
+      "name": "dresses",
+      "category_image": "https://lh3.googleusercontent.com/proxy/r5cy7beZALLG4HoVNO2NQZdhJM0n4pQfRkqFi3RlsiYg8EEE7HegXY2wq7M2VZ_cLhQ1GTev_Ojgz_Y4HfbHsYQGVYD_4ZXnYY7lKXcqhnpiMdQ"
     }
   },
   {
     "model": "items.category",
     "pk": 2,
     "fields": {
-      "name": "t-shirts"
+      "name": "t-shirts",
+      "category_image": "https://lh3.googleusercontent.com/proxy/PxgwwZCDJKsgvqjQZu0HQf0C_oeh2jqwdZqF962Ns60rzIEcStDuJghh68WioNTDQU5ss8w8aSgUevk5003aGQNxJzhFwh0BaQ"
     }
   },
   {
     "model": "items.category",
     "pk": 3,
     "fields": {
-      "name": "trousers"
+      "name": "trousers",
+      "category_image": "https://webstockreview.net/images/clipart-pants.jpg"
     }
   },
   {
     "model": "items.category",
     "pk": 4,
     "fields": {
-      "name": "skirts"
+      "name": "skirts",
+      "category_image": "https://lh3.googleusercontent.com/proxy/pA-nHQyURAUvtIFuBNcCYywOGd_PSNHtbD_Xy6sG6VxUbUGZmUfDH0wCcXx9jTHFKBPGygCd0FjKuJfNP51lTM4ll2tuMwZ9niUZ"
     }
   },
   {
     "model": "items.category",
     "pk": 5,
     "fields": {
-      "name": "shirts"
+      "name": "shirts",
+      "category_image": "https://cdn.clipart.email/73955c3e46ab715ae406c120b19c37ff_blue-shirt-clipart-free-download-best-blue-shirt-clipart-on-_566-612.jpeg"
     }
   },
   {
     "model": "items.category",
     "pk": 6,
     "fields": {
-      "name": "shoes"
+      "name": "shoes",
+      "category_image": "https://lh3.googleusercontent.com/proxy/A_f1eJB9TFA3PeB0j3oVekwwRll4OIhvV4_g1oRomFYSe1PW7jowjx1hBbLH3MHSyffxQRgCvPQJVbJapHFYHVpu"
     }
   },
   {
@@ -217,7 +223,7 @@
       "price": 12.49,
       "available": true,
       "size": "S",
-      "image": "https://d2h1pu99sxkfvn.cloudfront.net/b0/12283862/",
+      "image": "https://d2h1pu99sxkfvn.cloudfront.net/b0/10736083/425928694_fr8eYLuiCs/P0.jpg",
       "owner": 2,
       "categories": [
         1,

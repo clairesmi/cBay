@@ -48,36 +48,30 @@ export default {
   },
   methods: {
     async getBasket() {
-      const res = await axios.get('/api/basket')
-      // console.log(res.data)         
+      const res = await axios.get('/api/basket')     
       this.items = res.data
     },
     async removeCheck() {
       const res = await axios.get(`api/items/${event.target.id}/`) 
-      // console.log(res.data)
       this.item = res.data
       this.modalShow = !this.modalShow
-      // console.log(this.modalShow)
     },
     async handleRemove() {
-      //  if yes, use item ID to patch to update it with basket null 
-      // console.log(event.target)
       if (event.target.innerText === 'No') {
         this.modalShow = !this.modalShow 
-        // console.log(event.target.id)
         }
       else {  
-      const owner = this.item.owner
-      const item = {...this.item, basket: null, available: true, owner: owner.id, 
-      categories: this.item.categories.map(category => category.id)}
-       this.item = item
-      try {
-      await axios.patch(`/api/items/${this.item.id}/`, this.item)
-      this.$router.push('/items')
-      }
-      catch (err) {
-        console.log(err)
-        }
+        const owner = this.item.owner
+        const item = {...this.item, basket: null, available: true, owner: owner.id, 
+        categories: this.item.categories.map(category => category.id)}
+        this.item = item
+          try {
+          await axios.patch(`/api/items/${this.item.id}/`, this.item)
+          this.$router.push('/items')
+          }
+          catch (err) {
+            console.log(err)
+          }
       }
     },
     calculateTotal() {
