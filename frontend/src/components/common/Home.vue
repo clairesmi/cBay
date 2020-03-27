@@ -1,7 +1,7 @@
 <template>
-  <div id="home" class="h-screen flex flex-col">
+  <div id="home" class="h-screen flex flex-col font-sans bg-red-200">
     <nav class="pl-8 pr-16 header-wrapper w-screen flex flex-row flex justify-between">
-    <h2 class="text-red-700">{{ msg }}</h2>
+    <h2 class="text-black-700">{{ msg }}</h2>
     <div class="link-wrapper">
     <router-link to="/items">Go to Listings</router-link>
     <router-link to="/items/new">List a new Item</router-link>
@@ -12,27 +12,29 @@
     </div>
     </nav>
     <div class="title-wrapper h-64 flex justify-center flex items-center">
-      <h1 class="text-6xl tracking-wide">cBay</h1>
+      <router-link to="/items"><h1 class="animated zoomInDown cbay-title text-6xl tracking-wide text-orange-600">
+        cBay  </h1></router-link>
+    </div>
+    <div class=" cbay-description flex justify-center flex items-center pb-4 mb-6 text-orange-600">
+      <p>Buy and sell unwanted clothes with cBay! Sign up to get started...</p>
     </div>
     <div class="carousel-wrapper flex flex-col justify-center">
-      Categories
-        <p class="each-category text-4xl pl-8 pr-8">all (see everything)</p>
       <div class="categories-index flex flex-row items-center justify-center w-screen">
-        <button id="left-button" @click="handleClick" class="left-button text-2xl m-10"
-        :disabled="leftButtonDisabled">previous</button>
+        <button id="left-button" @click="handleClick" class="left-button text-2xl m-10 text-orange-500"
+        :disabled="leftButtonDisabled"><</button>
 
         <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.id}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
         flex flex-col justify-center items-center">
-          <img :src=this.previousCategory.image :alt=previousCategory.name class="h-48 w-12/12 border border-black" /></div></router-link>
+          <img :src=this.previousCategory.image :alt=previousCategory.name class="h-48 w-12/12" /></div></router-link>
         <router-link v-if="currentCategory" :to="{ path: `/categories/${this.currentCategory.id}` }"><div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12
         flex flex-col justify-center items-center">
-          <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12 border border-black" /></div></router-link>
+          <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12" /></div></router-link>
         <router-link v-if="nextCategory" :to="{ path: `/categories/${this.nextCategory.id}` }"><div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12
         flex flex-col justify-center items-center">
-          <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12 border border-black" /></div></router-link>
+          <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12" /></div></router-link>
 
-        <button id="right-button" @click="handleClick" class="right-button text-2xl m-10"
-        :disabled="rightButtonDisabled">next</button>
+        <button id="right-button" @click="handleClick" class="right-button text-2xl m-10 text-orange-500"
+        :disabled="rightButtonDisabled">></button>
         </div>
       </div>
     </div>
@@ -129,7 +131,25 @@ export default {
   }
 }
 </script>
-<style scoped src='../../styles/output.css'>
+<style>
+@import '../../styles/output.css';
+
+.cbay-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 120px;
+  /* text-decoration: underline; */
+}
+.cbay-description {
+  font-family: 'Oswald', sans-serif;
+  font-size: 25px;
+}
+.right-button {
+  font-size: 40px;
+}
+.left-button {
+  font-size: 40px;
+}
+
 /* Use scoped css file to only apply css styles to each specific component */
 
 /* Or use import */

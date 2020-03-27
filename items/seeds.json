@@ -12,7 +12,7 @@
     "pk": 2,
     "fields": {
       "name": "t-shirts",
-      "category_image": "https://lh3.googleusercontent.com/proxy/PxgwwZCDJKsgvqjQZu0HQf0C_oeh2jqwdZqF962Ns60rzIEcStDuJghh68WioNTDQU5ss8w8aSgUevk5003aGQNxJzhFwh0BaQ"
+      "category_image": "https://lh3.googleusercontent.com/proxy/zHQF08l8-dlTGj5G6PF_3SxfZXdV8o2OICPnR4U2HCW-s1OlkWCcCkYMXC3SNZcYodICtA5sNTyzlME7XJPazR854K9Hx5hlhPQmD4dHHIpDzWzgNXsm"
     }
   },
   {
@@ -20,7 +20,7 @@
     "pk": 3,
     "fields": {
       "name": "trousers",
-      "category_image": "https://webstockreview.net/images/clipart-pants.jpg"
+      "category_image": "https://webstockreview.net/images/clipart-clothes-transparent-background-2.png"
     }
   },
   {
@@ -44,7 +44,7 @@
     "pk": 6,
     "fields": {
       "name": "shoes",
-      "category_image": "https://lh3.googleusercontent.com/proxy/A_f1eJB9TFA3PeB0j3oVekwwRll4OIhvV4_g1oRomFYSe1PW7jowjx1hBbLH3MHSyffxQRgCvPQJVbJapHFYHVpu"
+      "category_image": "https://lh3.googleusercontent.com/proxy/CLNWWzAxnwqrHZ_Jl5wZ7eQoTcDvMRJ-pPnxud7O2cSgQ8qdd9B_r44Mo7Hb8kTWmsp5YQTJbnyj8Do1GllvKnX0"
     }
   },
   {
