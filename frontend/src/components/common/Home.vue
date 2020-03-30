@@ -59,7 +59,7 @@ export default {
       console.log(this.categories)
       }
       catch(err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     },
 

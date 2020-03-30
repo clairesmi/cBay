@@ -50,7 +50,7 @@ export default {
       this.categories = res.data
        }
        catch (err) {
-         console.log(err)
+         this.$router.push('/notfound')
        }
     },
 
@@ -72,7 +72,7 @@ export default {
         this.$router.push('/profile')
       }
       catch (error) {
-        console.log(error)
+        this.$router.push('/notfound')
       }
     }
   }

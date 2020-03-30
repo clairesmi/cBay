@@ -64,7 +64,7 @@ export default {
     this.user = res.data
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     },
     async getListings() {
@@ -73,10 +73,9 @@ export default {
           headers: { Authorization: `Bearer ${Auth.getToken()}`}
         })
         this.listings = res.data
-        console.log(this.listings)
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     },
     async getPurchasedItems() {
@@ -85,7 +84,7 @@ export default {
         this.purchasedItems = res.data
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     }
   }

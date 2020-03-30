@@ -48,9 +48,8 @@ export default {
         console.log(this.userListings[0].owner.recommendations.map(rev => rev))
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
-      // console.log(this.user)
     }
   }
   

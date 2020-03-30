@@ -13,6 +13,8 @@ import ProfileView from '../components/user_interaction/ProfileView.vue'
 import Basket from '../components/items/Basket.vue'
 import Checkout from '../components/items/Checkout.vue'
 
+import NotFound from '../components/common/NotFound.vue'
+
 
 const mode = 'history' 
 const routes = [
@@ -28,7 +30,8 @@ const routes = [
   { path: '/register', component: Register },
   { path: '/profile/:id', component: ProfileView },
   { path: '/profile', component: Profile },
-  { path: '/', component: Home }
+  { path: '/', component: Home },
+  { path: '/notfound', component: NotFound }
 ]
 
 const router = new Router({ routes, mode })

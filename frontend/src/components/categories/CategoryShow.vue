@@ -33,10 +33,9 @@ export default {
       try {
       const res = await axios.get(`/api/categories/${this.$route.params.id}`)
       this.category = res.data.items
-      console.log(this.category)
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     }
   }

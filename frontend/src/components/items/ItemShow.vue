@@ -69,7 +69,7 @@ export default {
             this.othersInCategory = othersInCategory[0]
       }
       catch (error) {
-        console.log(error)
+        this.$router.push('/notfound')
       }
     },
     // check if the logged in user is also the owner of the posted item 
@@ -92,7 +92,7 @@ export default {
       this.$router.push('/items')
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     },
 
@@ -104,7 +104,7 @@ export default {
           this.$router.push('/items')
         }
         catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
         }
       }
 

@@ -53,7 +53,7 @@ export default {
         this.categories = res.data
           }
         catch (err) {
-          console.log(err)
+          this.$router.push('/notfound')
         }
       },
       async handleSubmit() {
@@ -66,8 +66,8 @@ export default {
           await axios.patch(`/api/items/${itemId}/`, this.item)
           this.$router.push('/profile')
         }
-          catch (error) {
-          console.log(error)
+          catch (err) {
+          this.$router.push('/notfound')
         }
       },
       //  updatedValue can be used from the child component

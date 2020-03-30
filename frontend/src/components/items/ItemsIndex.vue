@@ -44,7 +44,6 @@ export default {
  }, 
   async mounted () {
     await this.getItems()
-    // this.isDisabled()
   },
 
 methods: {
@@ -53,9 +52,8 @@ methods: {
       const res = await axios.get("/api/items")
       this.items = res.data.sort((a, b) => b.available - a.available)
     }
-
     catch (error) {
-      console.log(error)
+      this.$router.push('/notfound')
       }
     }
   },
