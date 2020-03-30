@@ -5,7 +5,6 @@ import router from './router'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 Vue.use(Router)
-
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 

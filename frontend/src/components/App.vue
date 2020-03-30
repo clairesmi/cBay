@@ -1,7 +1,7 @@
 <template>
 <div id='app'>
   <navbar></navbar>
-  <router-view >
+  <router-view>
   </router-view>
 </div>
 </template>
@@ -22,7 +22,6 @@ import Checkout from './items/Checkout.vue'
 import Navbar from './common/Navbar.vue'
 import Vue from 'vue'
 import 'style-loader'
-// import 'postcss-loader'
 
 export default {
   name: "App",

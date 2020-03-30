@@ -52,6 +52,8 @@ export default {
         const res = await axios.post('/api/login', this.data)
         // console.log(res.data.token)
         Auth.setToken(res.data.token)
+        location.reload()
+        // reload the page to update the navbar
         this.$router.push('/profile')
       }
       catch(err) {

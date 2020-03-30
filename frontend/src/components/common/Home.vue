@@ -1,16 +1,5 @@
 <template>
   <div id="home" class="h-screen flex flex-col font-sans bg-red-200">
-    <nav class="pl-8 pr-16 header-wrapper w-screen flex flex-row flex justify-between">
-    <h2 class="text-black-700">{{ msg }}</h2>
-    <div class="link-wrapper">
-    <router-link to="/items">Go to Listings</router-link>
-    <router-link to="/items/new">List a new Item</router-link>
-    <router-link to="/register">Sign Up</router-link>
-    <router-link to="/login">Login</router-link>
-    <router-link to="/profile">Your Profile</router-link>
-    <a @click="handleLogout">Logout</a>
-    </div>
-    </nav>
     <div class="title-wrapper h-64 flex justify-center flex items-center">
       <router-link to="/items"><h1 class="animated zoomInDown cbay-title text-6xl tracking-wide text-orange-600">
         cBay  </h1></router-link>
@@ -20,7 +9,7 @@
     </div>
     <div class="carousel-wrapper flex flex-col justify-center">
       <div class="categories-index flex flex-row items-center justify-center w-screen">
-        <button id="left-button" @click="handleClick" class="left-button text-2xl m-10 text-orange-500"
+        <button id="left-button" @click="handleClick" class="left-button text-2xl m-10 text-orange-600"
         :disabled="leftButtonDisabled"><</button>
 
         <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.id}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
@@ -33,7 +22,7 @@
         flex flex-col justify-center items-center">
           <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12" /></div></router-link>
 
-        <button id="right-button" @click="handleClick" class="right-button text-2xl m-10 text-orange-500"
+        <button id="right-button" @click="handleClick" class="right-button text-2xl m-10 text-orange-600"
         :disabled="rightButtonDisabled">></button>
         </div>
       </div>
@@ -48,7 +37,6 @@ import 'animate.css'
 export default {
   name: 'home',
   data () {
-    // console.log('hello')
     return {
       msg: 'Home Page',
       categories: null,
@@ -124,10 +112,6 @@ export default {
           this.leftButtonDisabled = false  
 
     },
-    handleLogout() {
-      Auth.logout()
-      this.$router.push('/items')
-    }
   }
 }
 </script>

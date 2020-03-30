@@ -15,7 +15,6 @@ import Checkout from '../components/items/Checkout.vue'
 
 
 const mode = 'history' 
-
 const routes = [
   { path: '/checkout', component: Checkout },
   { path: '/basket', component: Basket },
