@@ -1,6 +1,5 @@
 <template>
   <div id="item-new">
-    <router-link to="/">Home</router-link>
     <item-form v-if="item" 
     :item="item" 
     :categories="categories" 

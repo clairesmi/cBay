@@ -15,7 +15,7 @@
       <router-link to="/items"><h1 class="animated zoomInDown cbay-title text-6xl tracking-wide text-orange-600">
         cBay  </h1></router-link>
     </div>
-    <div class=" cbay-description flex justify-center flex items-center pb-4 mb-6 text-orange-600">
+    <div class=" cbay-description flex justify-center flex items-center pb-4 mb-6 text-gray-800">
       <p>Buy and sell unwanted clothes with cBay! Sign up to get started...</p>
     </div>
     <div class="carousel-wrapper flex flex-col justify-center">
@@ -141,7 +141,8 @@ export default {
 }
 .cbay-description {
   font-family: 'Oswald', sans-serif;
-  font-size: 25px;
+  font-size: 22px;
+  letter-spacing: 0.5px;
 }
 .right-button {
   font-size: 40px;

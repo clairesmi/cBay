@@ -1,5 +1,6 @@
 <template>
 <div id='app'>
+  <navbar></navbar>
   <router-view >
   </router-view>
 </div>
@@ -18,6 +19,7 @@ import Profile from './common/Profile.vue'
 import ProfileView from './user_interaction/ProfileView.vue'
 import Basket from './items/Basket.vue'
 import Checkout from './items/Checkout.vue'
+import Navbar from './common/Navbar.vue'
 import Vue from 'vue'
 import 'style-loader'
 // import 'postcss-loader'
@@ -26,6 +28,7 @@ export default {
   name: "App",
   components: {
     Home,
+    Navbar,
     ItemsIndex,
     ItemShow,
     ItemNew,

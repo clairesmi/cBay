@@ -13,6 +13,9 @@ import ProfileView from '../components/user_interaction/ProfileView.vue'
 import Basket from '../components/items/Basket.vue'
 import Checkout from '../components/items/Checkout.vue'
 
+
+const mode = 'history' 
+
 const routes = [
   { path: '/checkout', component: Checkout },
   { path: '/basket', component: Basket },
@@ -29,6 +32,6 @@ const routes = [
   { path: '/', component: Home }
 ]
 
-const router = new Router({ routes })
+const router = new Router({ routes, mode })
 console.log(router.options.routes)
 export default router
