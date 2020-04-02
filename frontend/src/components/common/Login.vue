@@ -35,6 +35,7 @@
 
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { eventBus } from '../../app'
 
 export default {
   name: "login",
@@ -47,14 +48,14 @@ export default {
   methods: {
 
     async handleSubmit() {
-      console.log(this.data)
       try {
         const res = await axios.post('/api/login', this.data)
         // console.log(res.data.token)
         Auth.setToken(res.data.token)
-        location.reload()
-        // reload the page to update the navbar
         this.$router.push('/profile')
+        // eventBus.$emit('userLoggedIn')
+        // reference the method set up in the event bus in app.js which emits the event of the user logging in
+        eventBus.loginCheck()
       }
       catch(err) {
         this.$router.push('/notfound')

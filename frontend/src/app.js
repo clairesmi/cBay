@@ -8,6 +8,14 @@ Vue.use(Router)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
+export const eventBus = new Vue({
+  methods: {
+    loginCheck() {
+      this.$emit('userLoggedIn')
+    }
+  }
+})
+
 new Vue({ render: (createEl) => createEl(App),
   BootstrapVue,
   IconsPlugin,

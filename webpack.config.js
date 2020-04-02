@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 // const { HotModuleReplacementPlugin } = require('webpack')
 
@@ -19,9 +18,8 @@ module.exports = {
     rules: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
-      { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader', 'postcss-loader'] },
+      { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] },
       { test: /\.vue$/, loader: 'vue-loader' }
-
     ]
   },
   devServer: {
@@ -48,9 +46,6 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     })
-    // new CopyWebpackPlugin([
-    //   { from: './frontend/src/index/html', to: './frontend/dist/index/html' }
-    // ])
     // new webpack.EnvironmentPlugin(['MAPBOX_ACCESS_TOKEN'])
   ]
 }

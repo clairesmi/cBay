@@ -20,6 +20,7 @@ import ProfileView from './user_interaction/ProfileView.vue'
 import Basket from './items/Basket.vue'
 import Checkout from './items/Checkout.vue'
 import Navbar from './common/Navbar.vue'
+import NotFound from './common/NotFound.vue'
 import Vue from 'vue'
 import 'style-loader'
 
@@ -39,7 +40,8 @@ export default {
     Profile, 
     ProfileView,
     Basket,
-    Checkout
+    Checkout,
+    NotFound
   },
 
 }
