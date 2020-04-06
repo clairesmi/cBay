@@ -14,21 +14,18 @@
 
         <router-link v-if="previousCategory" :to="{ name: 'category-show',
       params: { id: this.previousCategory.id, 
-      name: this.previousCategory.name, 
       catName: this.previousCategory.name } }">
         <div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
         flex flex-col justify-center items-center">
           <img :src=this.previousCategory.image :alt=previousCategory.name class="h-48 w-12/12" /></div></router-link>
         <router-link v-if="currentCategory" :to="{ name: 'category-show',
       params: { id: this.currentCategory.id, 
-      name: this.currentCategory.name, 
       catName: this.currentCategory.name } }">
         <div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12
         flex flex-col justify-center items-center">
           <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12" /></div></router-link>
         <router-link v-if="nextCategory" :to="{ name: 'category-show',
       params: { id: this.nextCategory.id,
-      name: this.nextCategory.name,  
       catName: this.nextCategory.name } }">
         <div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12
         flex flex-col justify-center items-center">

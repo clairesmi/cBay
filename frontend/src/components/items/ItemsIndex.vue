@@ -1,5 +1,5 @@
 <template>
-<div id="items-index h-screen" class="flex flex-col justify-center items-center font-sans bg-red-200">
+<div id="items-index" class="flex flex-col justify-center items-center font-sans bg-red-200">
   <h1 class="animated zoomInDown listings-title tracking-wide text-orange-600">All Listings</h1>
   <form class=" flex justify-center w-full text-gray-800">
   <input class="listings-search mt-5 w-1/3"
