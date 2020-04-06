@@ -12,13 +12,19 @@
         <button id="left-button" @click="handleClick" class="left-button text-2xl m-10 text-orange-600"
         :disabled="leftButtonDisabled"><</button>
 
-        <router-link v-if="previousCategory" :to="{ path: `/categories/${this.previousCategory.id}` }"><div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
+        <router-link v-if="previousCategory" :to="{ name: 'category-show',
+      params: { id: this.previousCategory.id, catName: this.previousCategory.name } }">
+        <div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
         flex flex-col justify-center items-center">
           <img :src=this.previousCategory.image :alt=previousCategory.name class="h-48 w-12/12" /></div></router-link>
-        <router-link v-if="currentCategory" :to="{ path: `/categories/${this.currentCategory.id}` }"><div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12
+        <router-link v-if="currentCategory" :to="{ name: 'category-show',
+      params: { id: this.currentCategory.id, catName: this.currentCategory.name } }">
+        <div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12
         flex flex-col justify-center items-center">
           <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12" /></div></router-link>
-        <router-link v-if="nextCategory" :to="{ path: `/categories/${this.nextCategory.id}` }"><div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12
+        <router-link v-if="nextCategory" :to="{ name: 'category-show',
+      params: { id: this.nextCategory.id, catName: this.nextCategory.name } }">
+        <div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12
         flex flex-col justify-center items-center">
           <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12" /></div></router-link>
 

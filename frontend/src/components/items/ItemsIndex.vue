@@ -2,13 +2,13 @@
 <div id="items-index h-screen" class="flex flex-col justify-center items-center font-sans bg-red-200">
   <h1 class="animated zoomInDown listings-title tracking-wide text-orange-600">All Listings</h1>
   <form class=" flex justify-center w-full text-gray-800">
-  <input class="listings-search mt-10 w-2/4"
+  <input class="listings-search mt-5 w-1/3"
   placeholder=" search by keyword"
   v-model="searchTerm"
   />
-  <button @click.prevent="listingSearch" class="mt-10 ml-5">Search</button>
+  <!-- <button class="mt-10 ml-5 text-orange-600">Search</button> -->
   </form>
-  <div class="flex flex-row flex-wrap justify-around p-10">
+  <div class="flex flex-row flex-wrap justify-around p-5">
     <div v-for="elem in listingSearch()" :key="elem.id" class=" item-card flex p-5 bg-white mb-5">
       <div v-if="elem.available" class="flex flex-col flex-wrap">
       <router-link :to="`/items/${elem.id}/`"><img :src=elem.image alt="image-card" /></router-link>

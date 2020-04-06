@@ -1,7 +1,7 @@
 <template>
   <div id="category-show">
   <div>
-    <h1>Category Show</h1>
+    <h1 v-if="category">{{ $route.params.catName.slice(0, 1).toUpperCase() + $route.params.catName.slice(1) }}</h1>
   </div>
   <div v-if="category" >
   <div v-for="elem in category" :key="elem.id">
@@ -27,12 +27,14 @@ export default {
 
   async mounted() {
     this.getCategory()
+    console.log(this.$route)
   },
   methods: {
     async getCategory() {
       try {
       const res = await axios.get(`/api/categories/${this.$route.params.id}`)
       this.category = res.data.items
+      console.log(this.category)
       }
       catch (err) {
         this.$router.push('/notfound')
