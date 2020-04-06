@@ -1,7 +1,7 @@
 <template>
   <div id="category-show">
   <div>
-    <h1 v-if="category">{{ $route.params.catName.slice(0, 1).toUpperCase() + $route.params.catName.slice(1) }}</h1>
+    <h1 v-if="category">{{ this.header.slice(0, 1).toUpperCase() + this.header.slice(1) }}</h1>
   </div>
   <div v-if="category" >
   <div v-for="elem in category" :key="elem.id">
@@ -21,13 +21,13 @@ export default {
   name: "category-show",
   data() {
     return {
-      category: []
+      category: [],
+      header: this.$route.params.name
     }
   },
 
   async mounted() {
     this.getCategory()
-    console.log(this.$route)
   },
   methods: {
     async getCategory() {

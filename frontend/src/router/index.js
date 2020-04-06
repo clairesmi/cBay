@@ -24,7 +24,7 @@ const routes = [
   { path: '/items/:id/edit', component: ItemEdit },
   { path: '/items/:id/', component: ItemShow },
   { path: '/items', component: ItemsIndex },
-  { path: '/categories/:id/', component: CategoryShow, name: 'category-show' },
+  { path: '/categories/:id/:name', component: CategoryShow, name: 'category-show' },
   { path: '/categories', component: CategoriesIndex },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
