@@ -22,4 +22,3 @@ new Vue({ render: (createEl) => createEl(App),
   router,
   components: { App, Router }
 }).$mount('#app')
-

@@ -39,6 +39,7 @@ export default {
     },
   },
   created() {
+    // when the userLoggedIn event is emitted from the event bus, execute this.isAuth
     eventBus.$on('userLoggedIn', () => {
       this.isLoggedIn = this.isAuth()
     })
