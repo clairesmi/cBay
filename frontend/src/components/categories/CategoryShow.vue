@@ -18,7 +18,7 @@
       >
       <template slot="singleLabel" slot-scope="{ option }">{{ option }}</template>
       </multiselect>
-    <div v-if="category" class="flex flex-row flex-wrap justify-around p-5">
+    <div v-if="category.length" class="flex flex-row flex-wrap justify-around p-5">
       <div v-for="elem in listingSearch()" :key="elem.id" class="item-card flex flex-col p-5 bg-white m-5">
         <router-link :to="`/items/${elem.id}/`"><img :src="elem.image" /></router-link>
         <div class="flex flex-row justify-around pt-8">
@@ -28,10 +28,12 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col items-center" v-if="!listingSearch().length">
-      <h1 class="not-found-header p-5 text-orange-600">Sorry...</h1>
-      <p class="not-found-text text-gray-800">We don't currently have anything that matches your search criteria</p>
-      <p class="not-found-text text-gray-800">Please try another search!</p>
+    <div v-if="category.length">
+      <div class="flex flex-col items-center" v-if="!listingSearch().length">
+        <h1 class="not-found-header p-5 text-orange-600">Sorry...</h1>
+        <p class="not-found-text text-gray-800">We don't currently have anything that matches your search criteria</p>
+        <p class="not-found-text text-gray-800">Please try another search!</p>
+      </div>
     </div>
   </div>
 </template>
@@ -52,7 +54,7 @@ export default {
       searchTerm: '',
       sizes: [],
       selectedSizes: [],
-      // filteredItems: null
+      filteredItems: []
     }
   },
   async mounted() {
@@ -81,7 +83,6 @@ export default {
         return re.test(item.name) && selectedSizes.length ? selectedSizes.includes(item.size) 
         : (re.test(item.name) && category)
         })
-        return this.filteredItems
     },
   }
 
