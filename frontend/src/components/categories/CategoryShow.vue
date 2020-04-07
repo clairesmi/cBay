@@ -6,12 +6,17 @@
         <input class="mt-5 w-1/3"
         placeholder=" search by keyword"
         v-model="searchTerm"
+        @input.prevent="listingSearch"
       />
       </form>
       <multiselect
-      @input="sizeSelect"
+      v-model="selectedSizes"
+      @input="listingSearch"
       :options="sizes"
+      :multiple="true"
+      placeholder="Filter by size"
       >
+      <template slot="singleLabel" slot-scope="{ option }">{{ option }}</template>
       </multiselect>
     <div v-if="category" class="flex flex-row flex-wrap justify-around p-5">
       <div v-for="elem in listingSearch()" :key="elem.id" class="item-card flex flex-col p-5 bg-white m-5">
@@ -22,6 +27,11 @@
           <h4>Size: {{ elem.size }}</h4>
         </div>
       </div>
+    </div>
+    <div class="flex flex-col items-center" v-if="!listingSearch().length">
+      <h1 class="not-found-header p-5 text-orange-600">Sorry...</h1>
+      <p class="not-found-text text-gray-800">We don't currently have anything that matches your search criteria</p>
+      <p class="not-found-text text-gray-800">Please try another search!</p>
     </div>
   </div>
 </template>
@@ -40,7 +50,9 @@ export default {
       category: [],
       header: this.$route.params.catName,
       searchTerm: '',
-      sizes: []
+      sizes: [],
+      selectedSizes: [],
+      // filteredItems: null
     }
   },
   async mounted() {
@@ -51,22 +63,26 @@ export default {
       try {
       const res = await axios.get(`/api/categories/${this.$route.params.id}`)
       this.category = res.data.items
-      this.sizes = this.category.map(cat => cat.size)
-      console.log(this.sizes)
-      }
+      console.log(this.category)
+      this.sizes = this.category.reduce((a, b) => {
+        if (!a.includes(b.size)) {
+          a.push(b.size)
+        } return a 
+      }, [])
+    }
       catch (err) {
         this.$router.push('/notfound')
       }
     },
     listingSearch() {
-      const { category, searchTerm } = this
+      const { category, searchTerm, selectedSizes } = this
       const re = new RegExp(searchTerm, 'i')
-      return category.filter(cat => {
-        return re.test(cat.name)}).sort((a, b) => b.available - a.available)
+      return category.filter(item => {
+        return re.test(item.name) && selectedSizes.length ? selectedSizes.includes(item.size) 
+        : (re.test(item.name) && category)
+        })
+        return this.filteredItems
     },
-    sizeSelect() {
-      console.log('size')
-    }
   }
 
 }
@@ -94,5 +110,14 @@ form {
 }
 button {
   text-decoration: underline;
+}
+.not-found-header {  
+  font-family: 'Pacifico', cursive;
+  font-size: 80px;
+}
+.not-found-text {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  padding: 5px;
 }
 </style>
