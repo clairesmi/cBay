@@ -19,7 +19,7 @@
     <p>{{ item.name }}</p>
     <p>${{ item.price }}</p>
     <p>Size: {{ item.size }}</p>
-    <router-link :to="`/items/${item.id}/`"><img :src=item.image class="small-image" alt="category-image"/>
+    <router-link :to="{path: `/items/${item.id}/`}"><img :src=item.image class="small-image" alt="category-image"/>
     </router-link>
   </div>
   <div v-if="!isOwner" class="add-to-basket-wrapper">
@@ -82,6 +82,12 @@ export default {
     },
 
     async addToBasket() {
+
+      // if user is not logged in (if no payload) 
+      // then push user to login page, else execute the below
+
+      // sort out router links
+
       const userID = Auth.getPayload().sub
       const owner = this.item.owner
       const item = {...this.item, basket: userID, available: false, owner: this.item.owner.id, 

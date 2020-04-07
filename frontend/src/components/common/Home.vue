@@ -17,7 +17,7 @@
       catName: this.previousCategory.name } }">
         <div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
         flex flex-col justify-center items-center">
-          <img :src=this.previousCategory.image :alt=previousCategory.name class="h-48 w-12/12" /></div></router-link>
+          <img :src=this.previousCategory.image  :alt=previousCategory.name class="h-48 w-12/12" /></div></router-link>
         <router-link v-if="currentCategory" :to="{ name: 'category-show',
       params: { id: this.currentCategory.id, 
       catName: this.currentCategory.name } }">

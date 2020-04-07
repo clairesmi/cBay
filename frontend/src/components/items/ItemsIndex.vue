@@ -21,12 +21,14 @@
       <!-- <h5>Categories:</h5> -->
       <!-- <div v-for="category in elem.categories" :key="category.id"> {{ category.name }}</div> -->
       </div>
-      <div v-else class="unavailable-items-wrapper">
-        <h3>{{ elem.name }}</h3>
-        <h4>${{ elem.price.toFixed(2) }}</h4>
+      <div v-else class="unavailable-items-wrapper item-card flex flex-col flex-wrap">
         <img :src=elem.image alt="image-card"/>
-        <div>{{ elem.available ? 'Available' : 'SOLD' }}</div>
+        <div class="flex flex-row justify-around pt-8">
+        <h3>{{ elem.name }}</h3>
         <div>Size: {{ elem.size }}</div>
+        <h4>${{ elem.price.toFixed(2) }}</h4>
+        <div>{{ elem.available ? 'Available' : '*SOLD*' }}</div>
+        </div>
         <!-- <div v-for="category in elem.categories" :key="category.id"> {{ category.name }}</div> -->
       </div>
     </div>
