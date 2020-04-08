@@ -1,34 +1,37 @@
 <template>
 <div id="item-show">
-  <router-link to="/">Home</router-link>
-  <h1>Item Show Page</h1>
-
-<div>
-<h2>{{ item.name }}</h2>
-<div>
-  <img :src=item.image alt="item-image" />
-</div>
-<div>
-  <h3>${{ item.price }}</h3>
-  <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`"><p>Posted by {{ item.owner.username }}</p></router-link>
-  <p>Size: {{ item.size }}</p>
-  <p>Categories:</p>
-  <p v-for="category in item.categories" :key="category.name">{{ category.name }}</p>
-  <p>Other items you might like:</p>
-  <div v-for="item in othersInCategory" :key="item.id"> 
-    <p>{{ item.name }}</p>
-    <p>${{ item.price }}</p>
-    <p>Size: {{ item.size }}</p>
-    <router-link :to="`/items/${item.id}/`">
-      <img :src=item.image class="small-image" alt="category-image"/>
-    </router-link>
+<div v-if="item" class="show-page-wrapper flex flex-col justify-center w-full">
+  <div class="flex flex-row justify-center mt-5 mb-3">
+    <div class="flex h-full">
+      <img :src=item.image alt="item-image" class="w-full"/>
+    </div>
+    <div class="bg-red-100 w-1/3">
+      <h1>{{ item.name }}</h1>
+      <h3>${{ item.price }}</h3>
+      <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`"><p>Posted by {{ item.owner.username }}</p></router-link>
+      <p>Size: {{ item.size }}</p>
+      <p v-if="item.categories">{{ item.categories.length > 1 ? 'Categories:' : 'Category:'}} </p>
+      <p v-for="category in item.categories" :key="category.name">{{ category.name.slice(0, 1).toUpperCase() + category.name.slice(1) }}</p>
+      <div v-if="!isOwner" class="add-to-basket-wrapper">
+        <button @click.prevent="addToBasket">Add to Basket</button>
+      </div>
+      <div v-if="isOwner" class="item-delete">
+        <button @click.prevent="handleDelete">Delete this item</button>
+        <router-link :to="`/items/${item.id}/edit`"><button>Edit this item</button></router-link>
+      </div>
+    </div>
   </div>
-  <div v-if="!isOwner" class="add-to-basket-wrapper">
-    <button @click.prevent="addToBasket">Add to basket</button>
+  <div class="flex justify-center items-center pb-3">
+    <h3 v-if="othersInCategory.length">Other items you might like:</h3>
   </div>
-  <div v-if="isOwner" class="item-delete">
-    <button @click.prevent="handleDelete">Delete this item</button>
-    <router-link :to="`/items/${item.id}/edit`"><button>Edit this item</button></router-link>
+  <div class="flex justify-center items-center w-full">
+    <div v-for="item in othersInCategory" :key="item.id" class="flex flex-col pr-10"> 
+      <router-link :to="`/items/${item.id}/`">
+        <img :src=item.image class="small-image" :alt="item.name"/>
+      </router-link>
+      <p>${{ item.price }}</p>
+      <p>Size: {{ item.size }}</p>
+      </div>
   </div>
   
 </div>
@@ -137,8 +140,8 @@ img {
 }
 
 .small-image {
-  height: 200px;
-  width: 200px;
+  height: 140px;
+  width: 140px;
 }
 .login-modal {
   display: flex;

@@ -1,7 +1,7 @@
 <template>
   <div id="category-show" class=" flex flex-col justify-center items-center font-sans bg-red-200">
     <h1 class="animated zoomInDown category-title tracking-wide text-orange-600"
-     v-if="category">{{ this.header.slice(0, 1).toUpperCase() + this.header.slice(1) }}</h1>
+     v-if="category">{{ header.slice(0, 1).toUpperCase() + header.slice(1) }}</h1>
      <div class="flex w-3/6 justify-center items-center bg-white">
        <form class="flex w-3/6">
         <input class="w-full"
