@@ -31,6 +31,15 @@
   </div>
   
 </div>
+  <div v-if="loginModal">
+    <div class="login-modal">
+      <div class="modal-text">
+        <p>You must be logged in to fill your basket!</p>
+        <router-link to="/register"><button>Sign Up</button></router-link>
+        <router-link to="/login"><button>Login</button></router-link>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- add a location field into the show page with a map -->
   </div>
@@ -47,7 +56,8 @@ export default {
     return {
     item: {},
     othersInCategory: [],
-    isOwner: false
+    isOwner: false,
+    loginModal: false
     }
   },
 
@@ -87,6 +97,7 @@ export default {
       // then push user to login page, else execute the below
 
       // sort out router links
+      if (Auth.getPayload().sub) {
 
       const userID = Auth.getPayload().sub
       const owner = this.item.owner
@@ -99,6 +110,11 @@ export default {
       }
       catch (err) {
         this.$router.push('/notfound')
+      }
+
+      } else {
+        console.log('noo')
+        this.loginModal = true
       }
     },
 
@@ -128,5 +144,22 @@ img {
 .small-image {
   height: 200px;
   width: 200px;
+}
+.login-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 50%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal-text {
+  background-color: green;
+  width: 50vw;
+  height: 50vh;
+  opacity: 1;
 }
 </style>
