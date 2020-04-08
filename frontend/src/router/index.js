@@ -22,7 +22,7 @@ const routes = [
   { path: '/basket', component: Basket },
   { path: '/items/new', component: ItemNew },
   { path: '/items/:id/edit', component: ItemEdit },
-  { path: '/items/:id/', component: ItemShow },
+  { path: '/items/:id/', component: ItemShow, name: 'item-show' },
   { path: '/items', component: ItemsIndex },
   { path: '/categories/:id/:catName', component: CategoryShow, name: 'category-show' },
   { path: '/categories', component: CategoriesIndex },

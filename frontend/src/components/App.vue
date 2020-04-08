@@ -1,8 +1,7 @@
 <template>
 <div id='app' class="h-screen bg-red-200">
   <navbar></navbar>
-  <router-view>
-  </router-view>
+  <router-view :key="$route.fullPath"></router-view>
 </div>
 </template>
 <script>

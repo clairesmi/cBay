@@ -19,7 +19,8 @@
     <p>{{ item.name }}</p>
     <p>${{ item.price }}</p>
     <p>Size: {{ item.size }}</p>
-    <router-link :to="{path: `/items/${item.id}/`}"><img :src=item.image class="small-image" alt="category-image"/>
+    <router-link :to="`/items/${item.id}/`">
+      <img :src=item.image class="small-image" alt="category-image"/>
     </router-link>
   </div>
   <div v-if="!isOwner" class="add-to-basket-wrapper">
@@ -92,28 +93,22 @@ export default {
     },
 
     async addToBasket() {
-
-      // if user is not logged in (if no payload) 
+      // if user is not logged in (if no payload sub) 
       // then push user to login page, else execute the below
-
-      // sort out router links
       if (Auth.getPayload().sub) {
-
-      const userID = Auth.getPayload().sub
-      const owner = this.item.owner
-      const item = {...this.item, basket: userID, available: false, owner: this.item.owner.id, 
-      categories: this.item.categories.map(category => category.id) }
-      this.item = item
-      try {
-      await axios.patch(`/api${this.$route.path}/`, this.item)
-      this.$router.push('/items')
-      }
-      catch (err) {
-        this.$router.push('/notfound')
-      }
-
+        const userID = Auth.getPayload().sub
+        const owner = this.item.owner
+        const item = {...this.item, basket: userID, available: false, owner: this.item.owner.id, 
+        categories: this.item.categories.map(category => category.id) }
+        this.item = item
+        try {
+        await axios.patch(`/api${this.$route.path}/`, this.item)
+        this.$router.push('/items')
+        }
+        catch (err) {
+          this.$router.push('/notfound')
+        }
       } else {
-        console.log('noo')
         this.loginModal = true
       }
     },

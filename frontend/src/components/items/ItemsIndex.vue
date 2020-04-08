@@ -11,7 +11,7 @@
   <div class="flex flex-row flex-wrap justify-around p-5">
     <div v-for="elem in listingSearch()" :key="elem.id" class=" item-card flex p-5 bg-white mb-5">
       <div v-if="elem.available" class="flex flex-col flex-wrap">
-      <router-link :to="`/items/${elem.id}/`"><img :src=elem.image alt="image-card" /></router-link>
+      <router-link :to="{ name: 'item-show', params: { id: elem.id } }"><img :src=elem.image alt="image-card" /></router-link>
       <!-- <div>{{ elem.available ? 'Available' : 'SOLD' }}</div> -->
       <div class="flex flex-row justify-around pt-8">
         <h3>{{ elem.name }}</h3> 
