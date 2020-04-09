@@ -1,19 +1,23 @@
 <template>
 <div id="item-show">
 <div v-if="item" class="show-page-wrapper flex flex-col justify-center w-full">
-  <div class="flex flex-row justify-center mt-5 mb-3">
+  <div class="flex flex-row justify-center mt-5 mb-2 pb-2">
     <div class="flex h-full">
       <img :src=item.image alt="item-image" class="w-full"/>
     </div>
-    <div class="bg-red-100 w-1/3">
-      <h1>{{ item.name }}</h1>
+    <div class="bg-red-100 w-1/3 flex flex-col pl-5 pr-5 pt-2 justify-start">
+      <div class="item-show-header flex pb-5 text-orange-600"><h1 class="pr-5">{{ item.name }}</h1>
       <h3>${{ item.price }}</h3>
-      <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`"><p>Posted by {{ item.owner.username }}</p></router-link>
-      <p>Size: {{ item.size }}</p>
-      <p v-if="item.categories">{{ item.categories.length > 1 ? 'Categories:' : 'Category:'}} </p>
-      <p v-for="category in item.categories" :key="category.name">{{ category.name.slice(0, 1).toUpperCase() + category.name.slice(1) }}</p>
-      <div v-if="!isOwner" class="add-to-basket-wrapper">
-        <button @click.prevent="addToBasket">Add to Basket</button>
+      </div>
+      <h4 class="title flex">Size: <p class="detail pl-1">{{ item.size }}</p></h4>
+      <div class="item-category-header flex"><p class="pr-1 title" v-if="item.categories">{{ `${item.categories.length > 1 ? 'Categories' : 'Category'}` }}:  </p>
+      <p class="detail detail-link" v-for="category in item.categories" :key="category.name">
+        <router-link :to="`/categories/${category.id}/${category.name}`">{{ category.name.slice(0, 1).toUpperCase() + category.name.slice(1) }}
+        </router-link></p></div>
+      <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`">
+      <h4 class="title flex">Posted by: <p class="detail-link detail pl-1">{{ item.owner.username }}</p></h4></router-link>
+      <div v-if="!isOwner" class="add-to-basket-wrapper flex justify-center mt-20">
+        <button @click.prevent="addToBasket">Add to Basket 🛒</button>
       </div>
       <div v-if="isOwner" class="item-delete">
         <button @click.prevent="handleDelete">Delete this item</button>
@@ -21,16 +25,19 @@
       </div>
     </div>
   </div>
-  <div class="flex justify-center items-center pb-3">
-    <h3 v-if="othersInCategory.length">Other items you might like:</h3>
+  <div class="flex justify-center items-center">
+    <h3 class="title text-orange-600" v-if="othersInCategory.length">Other items you might like:</h3>
   </div>
   <div class="flex justify-center items-center w-full">
-    <div v-for="item in othersInCategory" :key="item.id" class="flex flex-col pr-10"> 
+    <div v-for="item in othersInCategory" :key="item.id" 
+    class="flex flex-col m-5 p-3 bg-white justify-center items-center"> 
       <router-link :to="`/items/${item.id}/`">
         <img :src=item.image class="small-image" :alt="item.name"/>
       </router-link>
-      <p>${{ item.price }}</p>
-      <p>Size: {{ item.size }}</p>
+      <div class="small-image-text flex pb-3 pt-1 justify-around items-center">
+      <p class="pr-1">Size: {{ item.size }}</p>
+      <p>${{ item.price.toFixed(2) }}</p>
+      </div>
       </div>
   </div>
   
@@ -134,14 +141,48 @@ export default {
 </script>
 
 <style scoped>
+.show-page-wrapper {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+}
+.item-show-header {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+}
+.title {
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
+}
+.detail {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.5px;
+  padding-top: 10px;
+}
+.detail-link:hover {
+  transform: scale(1.1);
+  color: #dd6b33;
+}
 img {
   height: 400px;
   width: 400px;
 }
+button {
+  padding: 5px 10px;
+  box-shadow: 1px 1px 10px 1px gray;
+}
+button:hover {
+  transform: scale(0.98);
+}
 
 .small-image {
-  height: 140px;
-  width: 140px;
+  height: 160px;
+  width: 160px;
+}
+.small-image-text {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 20px;
 }
 .login-modal {
   display: flex;
