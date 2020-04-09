@@ -35,7 +35,7 @@
       type="password"
       required="required"
       />
-      <button type="submit" class="form-button p-5 mt-5">Submit</button>
+      <button type="submit" class="form-button mt-5">Submit</button>
     </form>
   </div>
 </div>

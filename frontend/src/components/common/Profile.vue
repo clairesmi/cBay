@@ -1,6 +1,6 @@
 <template>
 <div id="profile">
-  <h1>Profile Page</h1>
+  <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mt-10 mb-10">Profile Page</h1>
   <div v-if="user" class="profile-wrapper">
     <div class="profile-name">
       <h1>Hello {{ user.username }}</h1>

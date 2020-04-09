@@ -12,7 +12,6 @@ import Profile from '../components/common/Profile.vue'
 import ProfileView from '../components/user_interaction/ProfileView.vue'
 import Basket from '../components/items/Basket.vue'
 import Checkout from '../components/items/Checkout.vue'
-
 import NotFound from '../components/common/NotFound.vue'
 
 

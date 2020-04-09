@@ -2,11 +2,13 @@ import Vue from 'vue/dist/vue.js'
 import Router from 'vue-router'
 import App from './components/App.vue'
 import router from './router'
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(Router)
-Vue.use(BootstrapVue)
-Vue.use(IconsPlugin)
+// Vue.use(BootstrapVue)
+// Vue.use(IconsPlugin)
 
 export const eventBus = new Vue({
   methods: {
@@ -17,8 +19,8 @@ export const eventBus = new Vue({
 })
 
 new Vue({ render: (createEl) => createEl(App),
-  BootstrapVue,
-  IconsPlugin,
+  // BootstrapVue,
+  // IconsPlugin,
   router,
   components: { App, Router }
 }).$mount('#app')

@@ -1,13 +1,16 @@
 <template>
-  <div id="item-form">
-    <router-link to="/">Home</router-link>
-    <form>
+  <div id="item-form" class="flex flex-col items-center h-full">
+    <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mt-10 mb-20">
+      Add a new listing! 
+    </h1>
+    <div class="form-wrapper h-64 w-2/4 flex">
+    <form class="flex flex-col w-full justify-around p-40 text-gray-900">
       <label>Name</label>
-      <input type="text" placeholder="Product name" v-model="item.name"/>
+      <input type="text" placeholder="Product name" v-model="item.name" required="required"/>
       <label>Price</label>
-      <input type="number" placeholder="0.00" step="0.01" v-model="item.price"/>
+      <input type="number" placeholder="0.00" step="0.01" v-model="item.price" required="required"/>
        <label>Size</label>
-      <input type="text" placeholder="Product size" v-model="item.size"/>
+      <input type="text" placeholder="Product size" v-model="item.size" required="required"/>
       <!-- sep component -->
       <label>Image</label>
       <image-upload v-on:image-upload="item.image = $event"></image-upload>
@@ -24,8 +27,9 @@
           </multiselect>
             <pre class="categories-chosen"><code>{{ value ? value.name: null }}</code></pre>
         </div>
-      <button @click="submitClicked">List your Item</button>
+      <button class="form-button mt-2" @click="submitClicked">List your Item</button>
     </form>
+    </div>
   </div>
 </template>
 
@@ -67,3 +71,9 @@ export default {
 }
 
 </script>
+<style scoped>
+label {
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+</style>
