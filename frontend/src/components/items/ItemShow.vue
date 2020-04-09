@@ -1,13 +1,13 @@
 <template>
 <div id="item-show" class="bg-red-200 h-full">
 <div v-if="item" class="show-page-wrapper flex flex-row justify-center h-full w-full bg-red-200 pt-5">
-  <div class="product-wrapper flex flex-row justify-center w-4/5 mb-20">
-    <div class="flex flex-col bg-white items-start justify-center items-center mr-10 pr-5 pl-5">
-      <h1 class="item-show-header pr-5 pb-5">{{ item.name }}</h1>
+  <div class="product-wrapper flex flex-row justify-center w-5/5 mb-20">
+    <div class="flex flex-col w-3/5 bg-white items-start justify-center items-center mr-5 pr-5 pl-5">
+      <h1 class="item-show-header pr-5">{{ item.name }}</h1>
       <img :src=item.image alt="item-image"/>
-      <h3 v-if="item.price" class="item-show-header pt-5">${{ item.price.toFixed(2) }}</h3>
+      <h3 v-if="item.price" class="item-show-header">${{ item.price.toFixed(2) }}</h3>
     </div>
-    <div class="bg-red-100 h-full w-1/3 flex flex-col pl-5 pr-5 pt-10 pb-10 justify-between text-gray-800">
+    <div class="bg-red-100 h-full w-2/5 flex flex-col pl-5 pr-5 pt-10 pb-10 mr-5 justify-between text-gray-800">
       <div class="details-wrapper h-full flex flex-col justify-start">
       <h4 class="title flex pb-1">Size: <p class="detail pl-1">{{ item.size }}</p></h4>
       <div class="item-category-header flex flex-col"><p class="pr-1 title" v-if="item.categories">{{ `${item.categories.length > 1 ? 'Categories' : 'Category'}` }}:  </p>
@@ -17,7 +17,7 @@
       <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`">
       <h4 class="title flex">Posted by:  <p class="detail-link detail pl-1">{{ item.owner.username }}</p></h4></router-link>
       </div>
-      <div class="buttons-wrapper flex flex-col items-center pb-16">
+      <div class="buttons-wrapper flex flex-col items-center pb-20">
       <div v-if="!isOwner" class="add-to-basket-wrapper flex justify-center mt-20">
         <button class="button text-gray-900" @click.prevent="addToBasket">Add to Basket 🛒</button>
       </div>
@@ -28,12 +28,12 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col justify-center w-1/5 pt-2">
-  <div class="flex">
+  <div class="others-in-category flex flex-col items-start justify-start w-1/5 pt-2 mb-20 bg-red-300">
+  <div class="flex pt-3 pl-2">
     <h3 class="title-others text-orange-600" v-if="othersInCategory.length">Other items you might like:</h3>
   </div>
-  <div class="flex flex-col justify-start items-start h-full w-full pt-3">
-    <div v-for="item in othersInCategory.slice(0, 3)" :key="item.id" 
+  <div class="flex flex-col justify-start items-center h-full w-full pt-3">
+    <div v-for="item in othersInCategory" :key="item.id" 
     class="flex flex-col h-48 m-4 pt-3 pr-2 pb-2 pl-2 bg-white items-center"> 
       <router-link :to="`/items/${item.id}/`">
         <img :src=item.image class="small-image" :alt="item.name"/>
@@ -157,8 +157,8 @@ export default {
   letter-spacing: 0.5px;
 }
 img {
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 500px;
 }
 .item-show-header {
   font-family: 'Permanent Marker', cursive;
@@ -171,6 +171,9 @@ img {
 .title-others {
   font-family: 'Pacifico', cursive;
   font-size: 25px;
+}
+.others-in-category {
+  overflow: scroll;
 }
 .detail {
   font-family: 'Oswald', sans-serif;

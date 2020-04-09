@@ -81,7 +81,7 @@ export default {
     async getPurchasedItems() {
       try {
         const res = await axios.get('api/purchased')
-        this.purchasedItems = res.data
+        this.purchasedItems = res.data.filter(item => item.purchased === this.user.id)
       }
       catch (err) {
         this.$router.push('/notfound')

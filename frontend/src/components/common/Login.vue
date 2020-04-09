@@ -53,11 +53,10 @@ export default {
     async handleSubmit() {
       try {
         const res = await axios.post('/api/login', this.data)
-        // console.log(res.data.token)
         Auth.setToken(res.data.token)
         this.$router.push('/profile')
         // eventBus.$emit('userLoggedIn')
-        // reference the method set up in the event bus in app.js which emits the event of the user logging in
+        // use the method set up in the event bus in app.js which emits the event of the user logging in
         eventBus.loginCheck()
       }
       catch(err) {
