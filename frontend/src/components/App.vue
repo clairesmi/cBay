@@ -1,5 +1,5 @@
 <template>
-<div id='app' class="h-screen bg-red-200">
+<div id='app' class=" h-screen bg-red-200">
   <navbar></navbar>
   <router-view :key="$route.fullPath"></router-view>
 </div>
