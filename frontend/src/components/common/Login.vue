@@ -1,30 +1,33 @@
 <template>
-<div id="login">
-  <h1>Login!</h1>
-  <div class="form-wrapper">
-    <form @submit.prevent="handleSubmit">
+<div id="login" class="flex flex-col items-center h-full">
+  <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mt-10 mb-10">Login!</h1>
+  <div class="form-wrapper h-64 w-2/4 flex">
+    <form class="flex flex-col w-full justify-around p-40 text-gray-900" @submit.prevent="handleSubmit">
       <label>Email</label>
         <input 
-      placeholder="email"
+      placeholder=" email"
       name="email"
       v-model="data.email"
       type="text"
+      required="required"
       />
       <label>Password</label>
         <input 
-      placeholder="password"
+      placeholder=" password"
       name="password"
       v-model="data.password"
       type="password"
+      required="required"
       />
       <label>Confirm your password</label>
         <input 
-      placeholder="password confirmation"
+      placeholder=" password confirmation"
       name="password_confirmation"
       v-model="data.password_confirmation"
       type="password"
+      required="required"
       />
-      <button type="submit" class="form=button">Submit</button>
+      <button type="submit" class="form-button p-5 mt-5">Submit</button>
     </form>
   </div>
 </div>

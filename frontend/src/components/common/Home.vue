@@ -83,8 +83,6 @@ export default {
       this.currentCategory = this.carouselCategories[i]
       this.previousCategory = this.carouselCategories[i - 1]
       this.nextCategory = this.carouselCategories[i + 1]
-
-      console.log(this.previousCategory)
     },
 
     handleClick() {

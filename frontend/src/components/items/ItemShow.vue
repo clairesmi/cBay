@@ -28,7 +28,7 @@
       </div>
     </div>
   </div>
-  <div class="flex flex-col justify-center w-1/5">
+  <div class="flex flex-col justify-center w-1/5 pt-2">
   <div class="flex">
     <h3 class="title-others text-orange-600" v-if="othersInCategory.length">Other items you might like:</h3>
   </div>
