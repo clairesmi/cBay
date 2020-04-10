@@ -76,7 +76,7 @@ methods: {
 }
 
 </script>
-<style>
+<style scoped>
 img {
   height: 380px;
   width: 380px;

@@ -140,4 +140,7 @@ button {
   font-size: 22px;
   padding: 5px;
 }
+.unavailable-items-wrapper {
+  opacity: 0.5;
+}
 </style>
