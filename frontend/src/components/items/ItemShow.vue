@@ -12,14 +12,14 @@
       <h4 class="title flex pb-1">Size: <p class="detail pl-1">{{ item.size }}</p></h4>
       <div class="item-category-header flex flex-col"><p class="pr-1 title" v-if="item.categories">{{ `${item.categories.length > 1 ? 'Categories' : 'Category'}` }}:  </p>
       <p class="detail detail-link pb-1" v-for="category in item.categories" :key="category.name">
-        <router-link :to="`/categories/${category.id}/${category.name}`">{{ category.name.slice(0, 1).toUpperCase() + category.name.slice(1) }}
+        <router-link v-if="category.name" :to="`/categories/${category.id}/${category.name}`">{{ category.name.slice(0, 1).toUpperCase() + category.name.slice(1) }}
         </router-link></p></div>
       <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`">
       <h4 class="title flex">Posted by:  <p class="detail-link detail pl-1">{{ item.owner.username }}</p></h4></router-link>
       </div>
       <div class="buttons-wrapper flex flex-col items-center pb-20">
       <div v-if="!isOwner" class="add-to-basket-wrapper flex justify-center mt-20">
-        <button class="button text-gray-900" @click.prevent="addToBasket">Add to Basket 🛒</button>
+        <button v-if="item.available" class="button text-gray-900" @click.prevent="addToBasket">Add to Basket 🛒</button>
       </div>
       <div v-if="isOwner" class="item-delete">
         <button class="button text-gray-900" @click.prevent="handleDelete">Delete this item</button>
@@ -71,6 +71,7 @@
 
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { eventBus } from '../../app'
 
 export default {
   name: "item-show",
@@ -110,7 +111,6 @@ export default {
       if (!this.item.owner) return null
       // console.log(Auth.getPayload().sub === this.item.owner.id)
       this.isOwner = Auth.getPayload().sub === this.item.owner.id
-      console.log(this.isOwner)
     },
 
     async addToBasket() {
@@ -132,6 +132,7 @@ export default {
       } else {
         this.loginModal = true
       }
+      eventBus.updateBasket()
     },
 
     async handleDelete() {

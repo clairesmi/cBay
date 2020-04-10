@@ -1,9 +1,9 @@
 <template>
-<div id="basket"  v-if="items">
+<div id="basket" v-if="items">
   <div class="basket-headers">
   <h1>What's in your basket?</h1>
   <h2>Total: ${{ total }}</h2>
-  <router-link to="/checkout"><button>Go to checkout</button></router-link>
+  <router-link v-if="items.length" to="/checkout"><button>Go to checkout</button></router-link>
   </div>
   <div class="basket-wrapper" v-for="item in items" :key="item.id">
       <div class="item-info">
@@ -16,7 +16,7 @@
         <button @click="removeCheck" :id="item.id">Remove from basket</button>
     </div>
   <div v-if="modalShow">
-    <div class="check-modal">
+    <div class="check-modal" @click="modalShow = false">
       <div class="modal-text">
       <p>Are you sure you want to remove this item from your basket?</p>
       <button @click="handleRemove" :id=item.id>Yes</button>
@@ -30,6 +30,7 @@
 <script>
 
 import axios from 'axios'
+import { eventBus } from '../../app'
 
 export default {
   name: "basket",
@@ -67,17 +68,23 @@ export default {
         this.item = item
           try {
           await axios.patch(`/api/items/${this.item.id}/`, this.item)
-          this.$router.push('/items')
+          this.getBasket()
           }
           catch (err) {
-            console.log(err)
+            this.$router.push('/notfound')
           }
       }
+      eventBus.removeFromBasket()
     },
     calculateTotal() {
       const priceArray = this.items.map(item => item.price)
       this.total = priceArray.reduce((total, current) => total + current, 0).toFixed(2)
     }
+  }, 
+  created() {
+    eventBus.$on('userLoggedIn', () => {
+      eventBus.calculateBasket(this.items.length)
+    })
   }
 }
 

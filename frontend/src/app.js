@@ -14,6 +14,15 @@ export const eventBus = new Vue({
   methods: {
     loginCheck() {
       this.$emit('userLoggedIn')
+    },
+    updateBasket() {
+      this.$emit('basketUpdated')
+    },
+    removeFromBasket() {
+      this.$emit('removedFromBasket')
+    },
+    calculateBasket(data) {
+      this.$emit('calculatedBasket', data)
     }
   }
 })

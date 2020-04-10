@@ -11,7 +11,6 @@
       <input type="number" placeholder="0.00" step="0.01" v-model="item.price" required="required"/>
        <label>Size</label>
       <input type="text" placeholder="Product size" v-model="item.size" required="required"/>
-      <!-- sep component -->
       <label>Image</label>
       <image-upload v-on:image-upload="item.image = $event"></image-upload>
       <label>Categories</label>
