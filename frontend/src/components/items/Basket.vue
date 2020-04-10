@@ -1,19 +1,29 @@
 <template>
-<div id="basket" v-if="items">
-  <div class="basket-headers">
-  <h1>What's in your basket?</h1>
-  <h2>Total: ${{ total }}</h2>
-  <router-link v-if="items.length" to="/checkout"><button>Go to checkout</button></router-link>
+<div id="basket" v-if="items" class="flex flex-col items-center">
+  <div class="basket-headers flex flex-col items-center h-full">
+  <h1 class="animated zoomInDown basket-title text-6xl tracking-wide text-orange-600 mt-10 mb-10">What's in your basket?</h1>
   </div>
-  <div class="basket-wrapper" v-for="item in items" :key="item.id">
-      <div class="item-info">
-        <h3>{{ item.name }}</h3>
-        <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image"/>
-        </router-link>
-        <p>${{ item.price }}</p>
-        <p>Size: {{ item.size }}</p>
-        <p v-if="item.owner">Listed by: {{ item.owner.username }}</p>
-        <button @click="removeCheck" :id="item.id">Remove from basket</button>
+  <div class="basket-wrapper w-2/5 flex-col justify-center pb-5 text-gray-900" v-for="item in items" :key="item.id">
+      <div class="item-info flex justify-start items-center bg-white">
+        <div>
+          <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image mr-10"/>
+          </router-link>
+        </div>
+        <div>
+          <h3>{{ item.name }}</h3>
+          <p>${{ item.price }}</p>
+          <p>Size: {{ item.size }}</p>
+          <router-link v-if="item.owner" :to="`/profile/${item.owner.id}/`">
+          <h4 v-if="item.owner" class="flex">Listed by: <p class="detail-link detail pl-1">{{ item.owner.username }}</p></h4>
+          </router-link>
+          <button class="button" @click="removeCheck" :id="item.id">Remove from basket</button>
+        </div>
+    </div>
+  </div>
+    <div class="flex flex-col w-3/4 flex justify-center items-center">
+      <h2 class="total flex justify-center items-center p-2 pl-5 pr-5 text-gray-900 w-2/4"><p>Total: ${{ total }}</p>
+      <router-link v-if="items.length" to="/checkout" class="flex flex-col justify-center items-center w-2/4">
+      <button class="button w-2/4 bg-red-100 text-gray-900">Go to checkout</button></router-link></h2>
     </div>
   <div v-if="modalShow">
     <div class="check-modal" @click="modalShow = false">
@@ -23,7 +33,6 @@
       <button @click="handleRemove" :id=item.id>No</button>
       </div>
     </div>
-  </div>
   </div>
   </div>
 </template>
@@ -91,9 +100,34 @@ export default {
 
 </script>
 <style scoped>
+.basket-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 80px;
+}
+.basket-wrapper {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+}
 img {
   height: 200px;
   width: 200px;
+}
+.button {
+  margin-top: 5px;
+  padding: 5px 8px;
+  box-shadow: 1px 1px 10px 1px gray;
+  font-family: 'Oswald', sans-serif;
+}
+.button:hover {
+  transform: scale(0.98);
+  color: #dd6b33;
+}
+.total {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+}
+.detail-link:hover {
+  color: #dd6b33;
 }
 .check-modal {
   display: flex;
