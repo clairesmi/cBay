@@ -18,8 +18,6 @@
         <div>Size: {{ elem.size }}</div> 
         <h3>${{ elem.price.toFixed(2) }}</h3>
       </div>
-      <!-- <h5>Categories:</h5> -->
-      <!-- <div v-for="category in elem.categories" :key="category.id"> {{ category.name }}</div> -->
       </div>
       <div v-else class="unavailable-items-wrapper item-card flex flex-col flex-wrap">
         <img :src=elem.image alt="image-card"/>
@@ -78,7 +76,7 @@ methods: {
 }
 
 </script>
-<style scoped>
+<style>
 img {
   height: 380px;
   width: 380px;

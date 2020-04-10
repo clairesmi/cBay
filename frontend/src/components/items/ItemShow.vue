@@ -31,8 +31,9 @@
   <div class="others-in-category flex flex-col items-start justify-start w-1/5 pt-2 mb-20 bg-red-300">
   <div class="flex pt-3 pl-2">
     <h3 class="title-others text-orange-600" v-if="othersInCategory.length">Other items you might like:</h3>
+    <h3 class="title-others text-orange-600 pl-5" v-else>More items coming soon!</h3>
   </div>
-  <div class="flex flex-col justify-start items-center h-full w-full pt-3">
+  <div v-if="othersInCategory" class="flex flex-col justify-start items-center h-full w-full pt-3">
     <div v-for="item in othersInCategory" :key="item.id" 
     class="flex flex-col h-48 m-4 pt-3 pr-2 pb-2 pl-2 bg-white items-center"> 
       <router-link :to="`/items/${item.id}/`">
@@ -47,7 +48,7 @@
   </div>
 </div>
   <div v-if="loginModal">
-    <div class="login-modal flex">
+    <div class="login-modal flex" @click="loginModal = false">
       <div class="modal-text bg-white flex flex-col justify-around items-center text-orange-600 pl-5">
         <div class="flex w-full h-full justify-end items-start pt-5 pr-5 text-gray-800">
         <button class="button flex justify-start items-start h-10" @click="loginModal = false">
@@ -97,7 +98,7 @@ export default {
         // console.log(this.item.owner.id)
         const othersInCategory = this.item.categories.map(category => 
           category.items.filter(item => item.id !== parseInt(this.$route.params.id)))
-            this.othersInCategory = othersInCategory[0]
+            this.othersInCategory = othersInCategory[0].filter(item => item.available)
       }
       catch (error) {
         this.$router.push('/notfound')

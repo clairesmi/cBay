@@ -22,11 +22,22 @@
     </div>
     <div v-if="category.length" class="flex flex-row flex-wrap justify-around p-5">
       <div v-for="elem in listingSearch()" :key="elem.id" class="item-card flex flex-col p-5 bg-white m-5">
+        <div v-if="elem.available">
         <router-link :to="`/items/${elem.id}/`"><img :src="elem.image" /></router-link>
         <div class="flex flex-row justify-around pt-8">
           <h2>{{ elem.name }}</h2>
           <h3>${{ elem.price.toFixed(2) }}</h3>
           <h4>Size: {{ elem.size }}</h4>
+        </div>
+        </div>
+        <div v-else class="unavailable-items-wrapper item-card flex flex-col flex-wrap">
+          <img :src=elem.image alt="image-card"/>
+          <div class="flex flex-row justify-around pt-8">
+            <h3>{{ elem.name }}</h3>
+            <div>Size: {{ elem.size }}</div>
+            <h4>${{ elem.price.toFixed(2) }}</h4>
+            <div>{{ elem.available ? 'Available' : '*SOLD*' }}</div>
+          </div>
         </div>
       </div>
     </div>
