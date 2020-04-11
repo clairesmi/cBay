@@ -1,17 +1,19 @@
 <template>
-<div id="profile">
-  <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mt-10 mb-10">Profile Page</h1>
-  <div v-if="user" class="profile-wrapper">
-    <div class="profile-name">
-      <h1>Hello {{ user.username }}</h1>
+<div id="profile" class="flex flex-col items-center w-full h-full bg-red-200">
+  <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mb-5">Profile Page</h1>
+  <div v-if="user" class="profile-wrapper flex w-full h-full justify-center items-center bg-red-200">
+    <div class="profile-name flex w-10/12 justify-center h-full p-5 bg-red-100 text-gray-800">
+      <div class="flex flex-col w-1/3 items-center">
+      <h1 class="username text-gray-800">Hello {{ user.username }}</h1>
       <p>Registered email: {{ user.email }}</p>
-      <img :src="user.profile_image">
-        <h2>Reviews from your customers</h2>
-      <div v-for="review in user.recommendations" :key="review.id">
+      <img v-if="user.profile_image" :src="user.profile_image">
       </div>
-      <div class="listings-wrapper">
-      <h2>Your Listings</h2>
-        <div v-for="listing in listings" :key="listing.id">
+        <!-- <h2>Reviews from your customers</h2>
+      <div v-for="review in user.recommendations" :key="review.id">
+      </div> -->
+      <div class="listings-wrapper flex flex-col w-1/3 items-center">
+      <h2 class="pb-2">Your Listings</h2>
+        <div v-for="listing in listings" :key="listing.id" class="flex flex-col items-center listing bg-white p-3">
           <p>{{ listing.name }}</p>
           <router-link :to="`/items/${listing.id}`"><img :src=listing.image /></router-link>
           <p>£{{ listing.price }}</p>
@@ -19,9 +21,9 @@
           <p>{{ listing.available ? 'Available' : 'Sold' }}</p>
         </div>
       </div>
-      <div class="purchased-items-wrapper">
-        <h2>Your Purchases</h2>
-          <div v-for="purchase in purchasedItems" :key="purchase.id">
+      <div class="purchased-items-wrapper flex flex-col w-1/3 h-full items-center">
+        <h2 class="pb-2">Your Purchases</h2>
+          <div v-for="purchase in purchasedItems" :key="purchase.id" class="flex flex-col items-center listing bg-white p-3 mb-3">
             <p>{{ purchase.name }}</p>
             <img :src=purchase.image />
             <p>£{{ purchase.price }}</p>
@@ -92,8 +94,26 @@ export default {
 }
 </script>
 <style scoped>
+.username {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+}
   img {
     height: 200px;
     width: 200px;
+  }
+  .profile-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+  }
+  .listings-wrapper {
+    overflow: scroll;
+  }
+  .listing {
+    box-shadow: 1px 1px 10px 1px gray;
+    font-family: 'Permanent Marker', cursive;
+  }
+  .purchased-items-wrapper {
+    overflow: scroll;
   }
 </style>

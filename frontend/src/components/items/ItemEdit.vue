@@ -1,6 +1,5 @@
 <template>
   <div id="item-edit">
-    <h1>Edit Item</h1>
     <item-form v-if="item" 
     :item="item" 
     :categories="categories" 

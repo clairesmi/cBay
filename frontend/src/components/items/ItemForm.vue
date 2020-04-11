@@ -1,9 +1,9 @@
 <template>
-  <div id="item-form" class="flex flex-col items-center h-full">
-    <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mt-10 mb-20">
-      Add a new listing! 
+  <div id="item-form" class="flex flex-col items-center">
+    <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mb-16">
+      {{ $route.path.includes('new') ? 'Add a new listing!' : 'Update your listing!' }}
     </h1>
-    <div class="form-wrapper h-64 w-2/4 flex">
+    <div class="form-wrapper h-full w-2/4 flex">
     <form class="flex flex-col w-full justify-around p-40 text-gray-900">
       <label>Name</label>
       <input type="text" placeholder="Product name" v-model="item.name" required="required"/>
@@ -64,6 +64,7 @@ export default {
     multiSelectInput() {
       //  emit the new values from the multi-select to the parent 
       this.$emit("multi-select-input", this.updatedValue)
+      console.log(this.$route.path.includes('add'))
     }
   }
 
@@ -73,6 +74,5 @@ export default {
 <style scoped>
 label {
   margin-bottom: 2px;
-  margin-top: 5px;
 }
 </style>

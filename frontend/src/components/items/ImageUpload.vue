@@ -2,7 +2,7 @@
 <div id="image-upload">
   <input id="files" type="file" placeholder="Upload Image" @change="handleUpload"/>
   <div class="h-24">
-  <img v-if="thumbnail" :src=this.thumbnail class="h-24 w-24" />
+  <img v-if="thumbnail" :src=this.thumbnail class="h-16 w-16" />
   <img v-if="loading" src="https://media.giphy.com/media/L05HgB2h6qICDs5Sms/giphy.gif" class="h-24 w-24 flex justify-center items-center" />
   </div>
   </div>

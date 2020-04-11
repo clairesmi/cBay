@@ -60,13 +60,9 @@ export default {
         return this.item = {...this.item, categories: []}
       }
       this.item = {...this.item, categories: updatedValue.map(val => val.id)}
-      // console.log(this.item)
     },
 
     async handleSubmit () {
-      // console.log('submitted')
-      console.log(this.item)
-
       try {
         await axios.post("/api/items", this.item)
         this.$router.push('/profile')
