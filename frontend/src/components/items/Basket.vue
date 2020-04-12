@@ -1,9 +1,9 @@
 <template>
-<div id="basket" v-if="items" class="flex flex-col items-center">
-  <div class="basket-headers flex flex-col items-center h-full">
-  <h1 class="animated zoomInDown basket-title text-6xl tracking-wide text-orange-600 mt-10 mb-10">What's in your basket?</h1>
+<div id="basket" v-if="items" class="flex flex-col items-center h-screen bg-red-200">
+  <div class="basket-headers flex flex-col items-center h-full bg-red-200">
+  <h1 class="animated zoomInDown basket-title text-6xl tracking-wide text-orange-600 mt-10">What's in your basket?</h1>
   </div>
-  <div class="basket-wrapper w-2/5 flex-col justify-center pb-5 text-gray-900" v-for="item in items" :key="item.id">
+  <div class="basket-wrapper w-2/5 flex-col justify-center pb-5 text-gray-900 bg-red-200 h-full" v-for="item in items" :key="item.id">
       <div class="item-info flex justify-start items-center bg-white">
         <div>
           <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image mr-10"/>
@@ -20,18 +20,28 @@
         </div>
     </div>
   </div>
-    <div class="flex flex-col w-3/4 flex justify-center items-center">
+    <div class="flex flex-col w-3/4 flex justify-center items-center bg-red-200">
       <h2 class="total flex justify-center items-center p-2 pl-5 pr-5 text-gray-900 w-2/4"><p>Total: ${{ total }}</p>
       <router-link v-if="items.length" to="/checkout" class="flex flex-col justify-center items-center w-2/4">
       <button class="button w-2/4 bg-red-100 text-gray-900">Go to checkout</button></router-link></h2>
     </div>
   <div v-if="modalShow">
     <div class="check-modal" @click="modalShow = false">
-      <div class="modal-text">
-      <p>Are you sure you want to remove this item from your basket?</p>
-      <button @click="handleRemove" :id=item.id>Yes</button>
-      <button @click="handleRemove" :id=item.id>No</button>
+      <div class="modal-text flex bg-white flex flex-col justify-around items-center text-orange-600 pl-5">
+        <div class="flex w-full h-full justify-end items-start pt-5 pr-5 text-gray-800">
+          <button class="button flex justify-start items-start h-10" @click="loginModal = false">
+            <p class="h-5 text-lg mb-1">X</p>
+          </button>
+        </div>
+      <p class="pb-20">Are you sure you want to remove this item from your basket?</p>
+      <div class="mb-20 text-gray-800 pb-3"> 
+        <button class="button text-gray-900 mr-2" @click="handleRemove" :id=item.id>Yes</button>
+        <button class="button text-gray-900 ml-2" @click="handleRemove" :id=item.id>No</button>
       </div>
+      </div>
+    </div>
+  <div v-if="!items">
+    <h1>NOTHING</h1>
     </div>
   </div>
   </div>
@@ -72,12 +82,14 @@ export default {
         }
       else {  
         const owner = this.item.owner
+        this.total -= this.item.price
         const item = {...this.item, basket: null, available: true, owner: owner.id, 
         categories: this.item.categories.map(category => category.id)}
         this.item = item
           try {
           await axios.patch(`/api/items/${this.item.id}/`, this.item)
           this.getBasket()
+          
           }
           catch (err) {
             this.$router.push('/notfound')
@@ -135,19 +147,17 @@ img {
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  /* background: beige; */
-  /* opacity: 0.2; */
   position: fixed;
   top: 50%;  
   left: 50%;
   transform: translate(-50%, -50%);
-  /* z-index: 1;  */
 }
 .modal-text {
-  background-color: green;
+  box-shadow: 1px 1px 10px 1px gray;
+  font-family: 'Pacifico', cursive;
+  font-size: 30px;
   width: 50vw;
   height: 50vh;
-  /* z-index: 2; */
   opacity: 1;
 }
 </style>
