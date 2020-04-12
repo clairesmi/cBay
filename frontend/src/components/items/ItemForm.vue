@@ -1,10 +1,10 @@
 <template>
-  <div id="item-form" class="flex flex-col items-center">
-    <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mb-16">
+  <div id="item-form" class="h-screen flex flex-col items-center bg-red-200">
+    <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mb-24">
       {{ $route.path.includes('new') ? 'Add a new listing!' : 'Update your listing!' }}
     </h1>
-    <div class="form-wrapper h-full w-2/4 flex">
-    <form class="flex flex-col w-full justify-around p-40 text-gray-900">
+    <div class="form-wrapper h-full w-2/4 flex bg-red-200">
+    <form class="flex flex-col w-full justify-around p-40 text-gray-900 bg-red-200">
       <label>Name</label>
       <input type="text" placeholder="Product name" v-model="item.name" required="required"/>
       <label>Price</label>
@@ -26,7 +26,7 @@
           </multiselect>
             <pre class="categories-chosen"><code>{{ value ? value.name: null }}</code></pre>
         </div>
-      <button class="form-button mt-2" @click="submitClicked">List your Item</button>
+      <button class="form-button mt-2 bg-red-200" @click.prevent="submitClicked">List your Item</button>
     </form>
     </div>
   </div>

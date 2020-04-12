@@ -1,10 +1,10 @@
 <template>
-<div id="profile-edit">
-  <h1>Edit your profile</h1>
+<div id="profile-edit" class="h-screen flex flex-col items-center bg-red-200">
+  <h1 class="animated zoomInDown user-form-title text-6xl tracking-wide text-orange-600 mb-16">Edit your profile</h1>
   <div v-if="user" class="form-wrapper h-full w-2/4 flex">
     <form class="flex flex-col w-full justify-around p-40 text-gray-900">
       <label>Username: </label>
-      <input type="text" placeholder="Username" v-model="user.username" required="required" disabled="disabled"/>
+      <input class="disabled" type="text" placeholder="Username" v-model="user.username" required="required" disabled="disabled"/>
       <label>Email Address:</label>
       <input type="text" placeholder="email address" v-model="user.email" required="required"/>
       <label>Profile Picture:</label>
@@ -51,6 +51,8 @@ export default {
 }
 </script>
 <style scoped>
-
+.disabled {
+  opacity: 0.5;
+}
 
 </style>
