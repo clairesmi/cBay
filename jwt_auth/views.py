@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED, HTTP_422_UNPROCESSABLE_ENTITY, HTTP_204_NO_CONTENT
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import get_user_model
@@ -14,6 +15,8 @@ User = get_user_model()
 
 class ProfileView(APIView):
 
+    permission_classes = (IsAuthenticated, )
+
     def get(self, request):
         # user = User.objects.get(pk=pk)
         #  ADD VIEW IN FOR ITEMS ADDED BY USER - POPULATE ITEMS ON USER
@@ -21,6 +24,16 @@ class ProfileView(APIView):
         serialized_user = PopulatedUserSerializer(user)
         # print(serialized_user)
         return Response(serialized_user.data)
+
+    def put(self, request):
+        user = request.user
+        # set the context to edit so password & confirmation are not needed & set partial
+        # to true so that the user can edit their chose fields without editing every field on the object
+        updated_user = UserSerializer(user, data=request.data, context={'is_edit': True}, partial=True)
+        if updated_user.is_valid():
+            updated_user.save()
+            return Response(updated_user.data)
+        return Response(updated_user.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
 
 class ListingView(APIView):
 

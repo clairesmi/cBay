@@ -13,6 +13,9 @@ class UserSerializer(serializers.ModelSerializer):
     password_confirmation = serializers.CharField(write_only=True)
 
     def validate(self, data):
+        # if context is edit, do not require password & confirmation
+        if self.context['is_edit']:
+            return data
 
         password = data.pop('password')
         password_confirmation = data.pop('password_confirmation')
@@ -34,7 +37,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
 
         model = User
-        fields = ('username', 'email', 'password', 'password_confirmation',
-        'profile_image', 'recommendations', 'basket')
-        extra_kwargs = {'recommendations': {'required': False}, 'basket': {'required': False}}
+        fields = '__all__'
+        extra_kwargs = {'recommendations': {'required': False}}
         
