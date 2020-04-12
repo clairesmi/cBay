@@ -58,7 +58,7 @@ class ProfileDetailView(APIView):
 class RegisterView(APIView):
 
     def post(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data, context={'is_edit': False})
         if serializer.is_valid():
             serializer.save()
             return Response({'message': 'Registration Successful'})

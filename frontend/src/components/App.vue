@@ -15,6 +15,7 @@ import CategoryShow from './categories/CategoryShow.vue'
 import Register from './common/Register.vue'
 import Login from './common/Login.vue'
 import Profile from './common/Profile.vue'
+import ProfileEdit from './common/ProfileEdit.vue'
 import ProfileView from './user_interaction/ProfileView.vue'
 import Basket from './items/Basket.vue'
 import Checkout from './items/Checkout.vue'
@@ -37,6 +38,7 @@ export default {
     Register,
     Login,
     Profile, 
+    ProfileEdit,
     ProfileView,
     Basket,
     Checkout,

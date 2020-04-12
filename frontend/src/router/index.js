@@ -9,6 +9,7 @@ import CategoryShow from '../components/categories/CategoryShow.vue'
 import Login from '../components/common/Login.vue'
 import Register from '../components/common/Register.vue'
 import Profile from '../components/common/Profile.vue'
+import ProfileEdit from '../components/common/ProfileEdit.vue'
 import ProfileView from '../components/user_interaction/ProfileView.vue'
 import Basket from '../components/items/Basket.vue'
 import Checkout from '../components/items/Checkout.vue'
@@ -27,6 +28,7 @@ const routes = [
   { path: '/categories', component: CategoriesIndex },
   { path: '/login', component: Login },
   { path: '/register', component: Register },
+  { path: '/profile/edit', component: ProfileEdit },
   { path: '/profile/:id', component: ProfileView },
   { path: '/profile', component: Profile },
   { path: '/', component: Home },
