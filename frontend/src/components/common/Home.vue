@@ -1,10 +1,10 @@
 <template>
   <div id="home" class="h-screen flex flex-col font-sans bg-red-200">
-    <div class="title-wrapper h-64 flex justify-center flex items-center">
+    <div class="title-wrapper h-56 flex justify-center flex items-center">
       <router-link to="/items"><h1 class="animated zoomInDown cbay-title text-6xl tracking-wide text-orange-600">
         cBay  </h1></router-link>
     </div>
-    <div class=" cbay-description flex justify-center flex items-center pb-4 mb-6 text-gray-800">
+    <div class=" cbay-description flex justify-center flex items-center text-gray-800 pt-2 pb-2">
       <p>Buy and sell unwanted clothes with cBay! Sign up to get started...</p>
     </div>
     <div class="carousel-wrapper flex flex-col justify-center">
@@ -13,23 +13,29 @@
         :disabled="leftButtonDisabled"><</button>
 
         <router-link v-if="previousCategory" :to="{ name: 'category-show',
-      params: { id: this.previousCategory.id, 
-      catName: this.previousCategory.name } }">
-        <div v-if="previousCategory" class="previous-category m-4 text-6xl text-blue-700 h-48 w-12/12
+        params: { id: this.previousCategory.id, 
+        catName: this.previousCategory.name } }">
+        <div v-if="previousCategory" class="previous-category m-4 text-6xl text-gray-800 w-12/12 bg-white p-3
         flex flex-col justify-center items-center">
-          <img :src=this.previousCategory.image  :alt=previousCategory.name class="h-48 w-12/12" /></div></router-link>
+          <img :src=this.previousCategory.image  :alt=previousCategory.name class="h-48 w-12/12" />
+          <p class="image-text text-4xl">{{ previousCategory.name }}</p>
+          </div></router-link>
         <router-link v-if="currentCategory" :to="{ name: 'category-show',
       params: { id: this.currentCategory.id, 
       catName: this.currentCategory.name } }">
-        <div v-if="currentCategory" class="current-category m-4 text-6xl text-green-700 h-64 w-12/12
+        <div v-if="currentCategory" class="current-category m-4 text-6xl text-gray-800 w-12/12 bg-white p-4
         flex flex-col justify-center items-center">
-          <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12" /></div></router-link>
+          <img :src=this.currentCategory.image :alt=currentCategory.name class="h-64 w-12/12" />
+          <p class="image-text text-4xl">{{ currentCategory.name }}</p>
+          </div></router-link>
         <router-link v-if="nextCategory" :to="{ name: 'category-show',
       params: { id: this.nextCategory.id,
       catName: this.nextCategory.name } }">
-        <div v-if="nextCategory" class="next-category m-4 text-6xl text-orange-700 h-48 w-12/12
+        <div v-if="nextCategory" class="next-category m-4 text-6xl text-gray-800 w-12/12 bg-white p-3
         flex flex-col justify-center items-center">
-          <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12" /></div></router-link>
+          <img :src=this.nextCategory.image :alt=nextCategory.name class="h-48 w-12/12" />
+          <p class="image-text text-4xl">{{ nextCategory.name }}</p>
+          </div></router-link>
 
         <button id="right-button" @click="handleClick" class="right-button text-2xl m-10 text-orange-600"
         :disabled="rightButtonDisabled">></button>
@@ -65,7 +71,6 @@ export default {
       try {
       const res = await axios.get("api/categories")
       this.categories = res.data
-      console.log(this.categories)
       }
       catch(err) {
         this.$router.push('/notfound')
@@ -95,9 +100,7 @@ export default {
         currCategory.classList.add('animated', 'pulse')
           setTimeout(function() {
             currCategory.classList.remove('animated', 'pulse')
-
           }, 700)
-        
         }, 100)
 
     if (event.target.id === 'right-button' && this.currentCategory.index < this.carouselCategories.length - 1 && this.nextCategory.index !== this.carouselCategories.length - 1) {
@@ -117,7 +120,6 @@ export default {
 
         this.previousCategory.index === 0 ? this.leftButtonDisabled = true : 
           this.leftButtonDisabled = false  
-
     },
   }
 }
@@ -128,12 +130,15 @@ export default {
 .cbay-title {
   font-family: 'Pacifico', cursive;
   font-size: 120px;
-  /* text-decoration: underline; */
 }
 .cbay-description {
   font-family: 'Oswald', sans-serif;
   font-size: 22px;
   letter-spacing: 0.5px;
+}
+.image-text {
+  font-family: 'Permanent Marker', cursive;
+  /* font-size: 20px; */
 }
 .right-button {
   font-size: 40px;
@@ -141,7 +146,10 @@ export default {
 .left-button {
   font-size: 40px;
 }
-
+img {
+  height: 200px;
+  width: 200px;
+}
 /* Use scoped css file to only apply css styles to each specific component */
 
 /* Or use import */
