@@ -1,10 +1,10 @@
 <template>
-<div id="basket" v-if="items" class="flex flex-col items-center h-screen bg-red-200">
+<div id="basket" class="flex flex-col items-center h-screen bg-red-200">
   <div class="basket-headers flex flex-col items-center h-full bg-red-200">
   <h1 class="animated zoomInDown basket-title text-6xl tracking-wide text-orange-600 mt-10">What's in your basket?</h1>
   </div>
-  <div class="basket-wrapper w-2/5 flex-col justify-center pb-5 text-gray-900 bg-red-200 h-full" v-for="item in items" :key="item.id">
-      <div class="item-info flex justify-start items-center bg-white">
+  <div class="basket-wrapper w-2/5 flex-col justify-center pb-5 text-gray-900 bg-red-200 h-full" v-if="items.length">
+      <div class="item-info flex justify-start items-center bg-white" v-for="item in items" :key="item.id">
         <div>
           <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image mr-10"/>
           </router-link>
@@ -20,7 +20,11 @@
         </div>
     </div>
   </div>
-    <div class="flex flex-col w-3/4 flex justify-center items-center bg-red-200">
+  <div v-else class="basket-empty flex flex-col items-center h-full text-gray-900">
+    <h1>Your basket is empty...</h1>
+    <router-link to="/items"><p class="basket-empty-link">Go back to listings</p></router-link>
+  </div>
+    <div class="flex flex-col w-3/4 flex justify-center items-center bg-red-200 pb-12">
       <h2 class="total flex justify-center items-center p-2 pl-5 pr-5 text-gray-900 w-2/4"><p>Total: ${{ total }}</p>
       <router-link v-if="items.length" to="/checkout" class="flex flex-col justify-center items-center w-2/4">
       <button class="button w-2/4 bg-red-100 text-gray-900">Go to checkout</button></router-link></h2>
@@ -29,7 +33,7 @@
     <div class="check-modal" @click="modalShow = false">
       <div class="modal-text flex bg-white flex flex-col justify-around items-center text-orange-600 pl-5">
         <div class="flex w-full h-full justify-end items-start pt-5 pr-5 text-gray-800">
-          <button class="button flex justify-start items-start h-10" @click="loginModal = false">
+          <button class="button flex justify-start items-start h-10" @click="modalShow = false">
             <p class="h-5 text-lg mb-1">X</p>
           </button>
         </div>
@@ -39,9 +43,6 @@
         <button class="button text-gray-900 ml-2" @click="handleRemove" :id=item.id>No</button>
       </div>
       </div>
-    </div>
-  <div v-if="!items">
-    <h1>NOTHING</h1>
     </div>
   </div>
   </div>
@@ -117,8 +118,20 @@ export default {
   font-size: 80px;
 }
 .basket-wrapper {
-    font-family: 'Oswald', sans-serif;
-    font-size: 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+}
+.basket-empty {
+  font-family: 'Oswald', sans-serif;
+  font-size: 40px;
+}
+.basket-empty-link {
+  text-decoration: underline;
+  font-size: 25px;
+}
+.basket-empty-link:hover {
+  color: #dd6b33;
+  transform: scale(1.02);
 }
 img {
   height: 200px;
