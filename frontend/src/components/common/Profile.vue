@@ -5,15 +5,16 @@
     <div class="profile-name flex w-10/12 justify-center h-full p-5 bg-red-100 text-gray-800">
       <div class="flex flex-col w-1/3 items-center">
       <h1 class="username text-gray-800">Hello {{ user.username }}</h1>
-      <p>Registered email: {{ user.email }}</p>
+      <p class="pb-2">Registered email: {{ user.email }}</p>
       <img v-if="user.profile_image" :src="user.profile_image">
+      <router-link to="/profile/edit"><button class="form-button mt-5">Edit your profile</button></router-link>
       </div>
         <!-- <h2>Reviews from your customers</h2>
       <div v-for="review in user.recommendations" :key="review.id">
       </div> -->
       <div class="listings-wrapper flex flex-col w-1/3 items-center">
       <h2 class="pb-2">Your Listings</h2>
-        <div v-for="listing in listings" :key="listing.id" class="flex flex-col items-center listing bg-white p-3">
+        <div v-for="listing in listings" :key="listing.id" class="flex flex-col items-center listing bg-white p-3 mb-3">
           <p>{{ listing.name }}</p>
           <router-link :to="`/items/${listing.id}`"><img :src=listing.image /></router-link>
           <p>£{{ listing.price }}</p>

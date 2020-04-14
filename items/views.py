@@ -11,10 +11,6 @@ from .serializers import ItemSerializer, PopulatedItemSerializer, CategorySerial
 
 class ItemListView(APIView):
 
-    # add permission classes in here
-
-    permission_classes = (IsAuthenticated, )
-
     def get(self, _request):
         items = Item.objects.all()
         serialized_items = PopulatedItemSerializer(items, many=True)
@@ -66,8 +62,9 @@ class BasketListView(APIView):
         user = request.user.id
         # print(user)
         basket = Item.objects.all().filter(basket=user)
-        # print(basket)
-        serializer = PopulatedItemSerializer(basket, many=True)
+        print(basket)
+        serializer = ItemSerializer(basket, many=True)
+        # print(serializer.data)
         return Response(serializer.data)
 
 class PurchasedListView(APIView):

@@ -29,7 +29,7 @@ export default {
       this.items = res.data
         }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
         }
       const priceArray = this.items.map(item => item.price)
       this.total = priceArray.reduce((total, current) => total + current, 0).toFixed(2)
@@ -37,16 +37,16 @@ export default {
     makePayment() {
       const userID = Auth.getPayload().sub
       const purchased = { purchased: userID }
-      console.log(purchased)
+      // console.log(purchased)
       try {
         this.items.map(item => axios.patch(`/api/items/${item.id}/`, {...item, owner: item.owner.id, 
-        purchased: userID,
+        purchased: userID, basket: null,
         categories: item.categories.map(category => category.id)}))
-        console.log(this.items)
+        // console.log(this.items)
         this.$router.push('/profile')
       }
       catch (err) {
-        console.log(err)
+        this.$router.push('/notfound')
       }
     }
   },

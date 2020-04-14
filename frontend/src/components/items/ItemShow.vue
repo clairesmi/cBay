@@ -164,7 +164,7 @@ img {
 }
 .item-show-header {
   font-family: 'Permanent Marker', cursive;
-  font-size: 60px;
+  font-size: 45px;
 }
 .title {
   font-family: 'Oswald', sans-serif;

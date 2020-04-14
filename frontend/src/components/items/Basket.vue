@@ -4,7 +4,7 @@
   <h1 class="animated zoomInDown basket-title text-6xl tracking-wide text-orange-600 mt-10">What's in your basket?</h1>
   </div>
   <div class="basket-wrapper w-2/5 flex-col justify-center pb-5 text-gray-900 bg-red-200 h-full" v-if="items.length">
-      <div class="item-info flex justify-start items-center bg-white" v-for="item in items" :key="item.id">
+      <div class="item-info flex justify-start items-center bg-white mb-2" v-for="item in items" :key="item.id">
         <div>
           <router-link :to="`/items/${item.id}/`"><img :src=item.image alt="item-image" class="item-image mr-10"/>
           </router-link>
@@ -20,11 +20,11 @@
         </div>
     </div>
   </div>
-  <div v-else class="basket-empty flex flex-col items-center h-full text-gray-900">
+  <div v-else class="basket-empty flex flex-col items-center h-full text-gray-900 bg-red-200">
     <h1>Your basket is empty...</h1>
     <router-link to="/items"><p class="basket-empty-link">Go back to listings</p></router-link>
   </div>
-    <div class="flex flex-col w-3/4 flex justify-center items-center bg-red-200 pb-12">
+    <div class="flex flex-col w-full flex justify-center items-center bg-red-200 pb-12">
       <h2 class="total flex justify-center items-center p-2 pl-5 pr-5 text-gray-900 w-2/4"><p>Total: ${{ total }}</p>
       <router-link v-if="items.length" to="/checkout" class="flex flex-col justify-center items-center w-2/4">
       <button class="button w-2/4 bg-red-100 text-gray-900">Go to checkout</button></router-link></h2>
@@ -51,6 +51,7 @@
 
 import axios from 'axios'
 import { eventBus } from '../../app'
+import Auth from '../../lib/auth'
 
 export default {
   name: "basket",
@@ -66,11 +67,16 @@ export default {
   async mounted() {
     await this.getBasket()
     this.calculateTotal()
+    // console.log(Auth.getPayload().sub)
   },
   methods: {
     async getBasket() {
-      const res = await axios.get('/api/basket')     
+      const res = await axios.get('/api/basket')
       this.items = res.data
+      // .filter(item => item.basket === Auth.getPayload().sub)
+      console.log(this.items)
+      // console.log(this.items
+      // .filter(item => item.basket === Auth.getPayload().sub))
     },
     async removeCheck() {
       const res = await axios.get(`api/items/${event.target.id}/`) 
