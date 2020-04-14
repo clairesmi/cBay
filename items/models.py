@@ -2,6 +2,7 @@
 from django.db import models
 from jwt_auth.models import User
 
+
 # Create your models here.
 
 class Category(models.Model):
@@ -24,7 +25,7 @@ class Item(models.Model):
         blank=True
     )
     owner = models.ForeignKey(
-        'jwt_auth.User',
+        User,
         related_name='items',
         on_delete=models.CASCADE,
         null=True,

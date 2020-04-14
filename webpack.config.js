@@ -10,13 +10,13 @@ module.exports = {
   entry: './src/app.js',
   context: path.resolve(__dirname, 'frontend'),
   output: {
-    filename: 'bundle.js',
     path: path.resolve(__dirname, 'frontend/dist'),
-    publicPath: '/'
+    filename: 'bundle.js',
+    publicPath: '/dist/'
   },
   module: {
     rules: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/, include: [path.join(__dirname, 'src')] },
       { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
       { test: /\.s(a|c)ss$/, loader: ['style-loader', 'css-loader', 'sass-loader'] },
       { test: /\.vue$/, loader: 'vue-loader' }
@@ -36,6 +36,12 @@ module.exports = {
       }
     }
   },
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    },
+    extensions: ['*', '.js', '.vue', '.json']
+  },
   plugins: [
     // new HotModuleReplacementPlugin(),
     new VueLoaderPlugin(),
@@ -43,9 +49,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       // add favicon here
       template: 'src/index.html',
-      filename: 'index.html',
+      // filename: 'index.html',
+      filename: path.join(__dirname, 'dist', 'index.html'),
       inject: 'body'
     })
-    // new webpack.EnvironmentPlugin(['MAPBOX_ACCESS_TOKEN'])
   ]
 }

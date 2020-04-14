@@ -59,9 +59,9 @@ class CategoryDetailView(APIView):
 
 class BasketListView(APIView):
     def get(self, request):
-        user = request.user.id
+        user = request.user
         # print(user)
-        basket = Item.objects.all().filter(basket=user)
+        basket = Item.objects.all().filter(basket=user.id)
         print(basket)
         serializer = ItemSerializer(basket, many=True)
         # print(serializer.data)
@@ -69,9 +69,9 @@ class BasketListView(APIView):
 
 class PurchasedListView(APIView):
     def get(self, request):
-        user = request.user.id
+        user = request.user
         # print(user)
-        purchased = Item.objects.all().filter(purchased=user)
+        purchased = Item.objects.all().filter(purchased=user.id)
         # print(purchased)
         serializer = PopulatedItemSerializer(purchased, many=True)
         # print(serializer.data)

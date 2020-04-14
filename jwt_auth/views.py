@@ -40,9 +40,9 @@ class ListingView(APIView):
     permission_classes = (IsAuthenticated, )
 
     def get(self, request):
-        user = request.user.id
+        user = request.user
         print(user)
-        items = Item.objects.all().filter(owner=user)
+        items = Item.objects.all().filter(owner=user.id)
         serializer = PopulatedItemSerializer(items, many=True)
         return Response(serializer.data, status=200)
 

@@ -3,6 +3,9 @@ import Router from 'vue-router'
 import App from './components/App.vue'
 import router from './router'
 
+import '../src/styles/output.css'
+import 'animate.css'
+
 Vue.use(Router)
 
 export const eventBus = new Vue({
