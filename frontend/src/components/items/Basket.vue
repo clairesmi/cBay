@@ -106,7 +106,7 @@
 <script>
 import axios from "axios";
 import { eventBus } from "../../main";
-// import Auth from "../../lib/auth";
+import Auth from "../../lib/auth";
 
 export default {
   name: "basket",
@@ -122,16 +122,17 @@ export default {
   async mounted() {
     await this.getBasket();
     this.calculateTotal();
-    // console.log(Auth.getPayload().sub)
   },
   methods: {
     async getBasket() {
-      const res = await axios.get("/api/basket");
-      this.items = res.data;
-      // .filter(item => item.basket === Auth.getPayload().sub)
-      console.log(this.items);
-      // console.log(this.items
-      // .filter(item => item.basket === Auth.getPayload().sub))
+      try {
+        const res = await axios.get("/api/basket");
+        this.items = res.data.filter(
+          item => item.basket === Auth.getPayload().sub
+        );
+      } catch (err) {
+        this.$router.push("/notfound");
+      }
     },
     async removeCheck() {
       const res = await axios.get(`api/items/${event.target.id}/`);

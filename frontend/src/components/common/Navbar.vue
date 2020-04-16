@@ -19,7 +19,9 @@
         </div>
         <div class="pr-5 pl-2">
           <router-link to="/basket">
-            <div class="flex justify-center items-center basket-count text-xs bg-orange-600">
+            <div
+              class="flex justify-center items-center basket-count text-xs bg-orange-600"
+            >
               <p class="text-white">{{ itemsInBasket }}</p>
             </div>
             <p class="text-xl">🛒</p>

@@ -1,5 +1,6 @@
 module.exports = {
   // options...
+  // setting up a proxy on the dev server to make requests to the backend and stop cors errors
   devServer: {
     proxy: {
       "/api": {
@@ -11,6 +12,7 @@ module.exports = {
       }
     }
   },
+  // specifying the entry point of the app and the location of the template to be used
   pages: {
     index: {
       entry: "frontend/src/main.js",

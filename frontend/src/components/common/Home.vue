@@ -1,11 +1,9 @@
-/* eslint-disable vue/no-parsing-error */ /* eslint-disable prettier/prettier */
-/* eslint-disable vue/no-parsing-error */
 <template>
   <div id="home" class="h-screen flex flex-col font-sans bg-red-200">
     <div class="title-wrapper h-56 flex justify-center flex items-center">
       <router-link to="/items">
         <h1
-          class="animated zoomInDown cbay-title text-6xl tracking-wide text-orange-600"
+          class="cbay-title animated zoomInDown cbay-title tracking-wide text-orange-600"
         >
           cBay
         </h1>
@@ -26,7 +24,7 @@
           class="left-button text-2xl m-10 text-orange-600"
           :disabled="leftButtonDisabled"
         >
-          left
+          ←
         </button>
 
         <router-link
@@ -102,7 +100,7 @@
           class="right-button text-2xl m-10 text-orange-600"
           :disabled="rightButtonDisabled"
         >
-          right
+          →
         </button>
       </div>
     </div>

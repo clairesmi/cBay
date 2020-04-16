@@ -29,39 +29,46 @@ export default {
   data() {
     return {
       items: [],
-      total: null
+      total: "",
+      currentUserID: null
     };
   },
-  mounted() {
+  async mounted() {
+    this.currentUserID = await Auth.getPayload().sub;
+    await this.getItems();
     this.getTotal();
+    // console.log(this.total);
   },
   methods: {
-    async getTotal() {
+    async getItems() {
       try {
         const res = await axios.get("api/basket");
-        this.items = res.data;
+        this.items = res.data.filter(el => el.basket === this.currentUserID);
       } catch (err) {
         this.$router.push("/notfound");
       }
-      const priceArray = this.items.map(item => item.price);
+    },
+    getTotal() {
+      const priceArray = this.items.map(el => el.price);
+
       this.total = priceArray
         .reduce((total, current) => total + current, 0)
         .toFixed(2);
     },
-    makePayment() {
-      const userID = Auth.getPayload().sub;
-      // console.log(purchased)
+    async makePayment() {
+      // const userID = Auth.getPayload().sub;
+      const items = this.items.map(item => ({
+        ...item,
+        owner: item.owner,
+        purchased: this.currentUserID,
+        basket: null,
+        categories: item.categories.map(category => category)
+      }));
       try {
-        this.items.map(item =>
-          axios.patch(`/api/items/${item.id}/`, {
-            ...item,
-            owner: item.owner.id,
-            purchased: userID,
-            basket: null,
-            categories: item.categories.map(category => category.id)
-          })
+        await items.map(item =>
+          axios.patch(`/api/items/${item.id}/`, { ...item })
         );
-        // console.log(this.items)
+        console.log(items);
         this.$router.push("/profile");
       } catch (err) {
         this.$router.push("/notfound");

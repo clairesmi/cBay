@@ -163,6 +163,7 @@ export default {
   async mounted() {
     await this.getItem();
     this.isOwnerCheck();
+    console.log(Auth.getPayload().sub);
   },
 
   methods: {
@@ -197,6 +198,7 @@ export default {
       // then push user to login page, else execute the below
       if (Auth.getPayload().sub) {
         const userID = Auth.getPayload().sub;
+        console.log(userID);
         const item = {
           ...this.item,
           basket: userID,
@@ -205,6 +207,7 @@ export default {
           categories: this.item.categories.map(category => category.id)
         };
         this.item = item;
+        console.log(this.item);
         try {
           await axios.patch(`/api${this.$route.path}/`, this.item);
           this.$router.push("/items");
