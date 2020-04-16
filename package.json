@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "front": "vue-cli-service serve",
-    "back": "python manage.py runserver 8000",
+    "back": "python manage.py runserver 8080",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
