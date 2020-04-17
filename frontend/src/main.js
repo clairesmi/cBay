@@ -21,6 +21,9 @@ export const eventBus = new Vue({
     },
     calculateBasket(data) {
       this.$emit("calculatedBasket", data);
+    },
+    emptyBasket() {
+      this.$emit('basketIsEmpty')
     }
   }
 });

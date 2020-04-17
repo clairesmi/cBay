@@ -23,6 +23,7 @@
 <script>
 import axios from "axios";
 import Auth from "../../lib/auth";
+import { eventBus } from '../../main';
 
 export default {
   name: "checkout",
@@ -37,7 +38,6 @@ export default {
     this.currentUserID = await Auth.getPayload().sub;
     await this.getItems();
     this.getTotal();
-    // console.log(this.total);
   },
   methods: {
     async getItems() {
@@ -68,7 +68,7 @@ export default {
         await items.map(item =>
           axios.patch(`/api/items/${item.id}/`, { ...item })
         );
-        console.log(items);
+        eventBus.emptyBasket()
         this.$router.push("/profile");
       } catch (err) {
         this.$router.push("/notfound");

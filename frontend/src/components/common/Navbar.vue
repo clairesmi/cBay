@@ -78,6 +78,9 @@ export default {
       eventBus.$on("calculatedBasket", data => {
         this.itemsInBasket = data;
       });
+      eventBus.$on("basketIsEmpty", () => {
+        this.itemsInBasket = 0
+      })
   }
 };
 </script>
