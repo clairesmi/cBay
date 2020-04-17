@@ -27,7 +27,7 @@ FRONTEND_DIR = os.path.join(BASE_DIR, 'frontend')
 
 # Vue assets directory (assetsDir)
 STATICFILES_DIRS = [
-    os.path.join(os.path.normpath(FRONTEND_DIR), 'dist/static'),
+    os.path.join(os.path.normpath(FRONTEND_DIR), 'static'),
 ]
 
 
