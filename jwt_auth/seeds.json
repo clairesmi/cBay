@@ -1,0 +1,38 @@
+[
+  {
+    "model": "jwt_auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pass",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-02-23T15:02:03Z",
+      "username": "claire",
+      "email": "claire@email.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "jwt_auth.user",
+    "pk": 2,
+    "fields": {
+      "password": "pass",
+      "last_login": null,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2020-02-23T15:02:03Z",
+      "username": "gemma",
+      "email": "gemma@email.com",
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+  ]
