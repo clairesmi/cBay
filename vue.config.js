@@ -15,8 +15,8 @@ module.exports = {
   // specifying the entry point of the app and the location of the template to be used
   pages: {
     index: {
-      entry: "./src/main.js",
-      template: "./public/index.html"
+      entry: "frontend/src/main.js",
+      template: "frontend/public/index.html"
     }
   },
   // outputDir must be added to Django's TEMPLATE_DIRS
