@@ -70,8 +70,8 @@ $ cd frontend yarn build
 - Jest
 
 ## User Experience
-
-[insert user journey image here]
+### User Journey
+![User-journey screenshot](/readme-assets/user-journey.png) 
 
 ### Buyer
 
