@@ -60,10 +60,10 @@ class CategoryDetailView(APIView):
 class BasketListView(APIView):
     def get(self, request):
         user = request.user
-        # print(user)
+        print(user.id)
         basket = Item.objects.all()
         # .filter(basket=user.id)
-        print(basket)
+        # print(basket)
         serializer = ItemSerializer(basket, many=True)
         # print(serializer.data)
         return Response(serializer.data)

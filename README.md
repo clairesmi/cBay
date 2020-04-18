@@ -153,19 +153,95 @@ export const eventBus = new Vue({
   }
 });
 ```
-I put my methods inside this Vue instance so that they can be used to emit certain events which can be listened out for by any of my other components. 
+I put my methods inside this Vue instance so that they can be used to emit certain events which can be listened to by any of my other components. 
 
-The most complex method I created was the calculateBasket method.
+The most complex method I created was the calculateBasket method. 
 
-Snippets:
+This created function in the Basket.vue component listens for the userLoggedIn event which is emitted by the login component. When the basket hears this event, the event bus function calculateBasket is called with the length of the basket items array passed in as a parameter. This means that the correct amount of items is shown in the user's basket when they login (which is useful if they have logged out with items still in their basket).
+```
+created() {
+  eventBus.$on("userLoggedIn", () => {
+    eventBus.calculateBasket(this.items.length);
+  });
+```
+The Navbar.vue component then listens for the calculatedBasket event and has access to the parameter passed in through the calculateBasket function. 
+```
+eventBus.$on("calculatedBasket", data => {
+  this.itemsInBasket = data;
+});
+```
+Within the Navbar.vue component the data property itemsInBasket is set to point to the same value that is emitted from the calculateBasket function. This data property is then dynamically updated within the template and displayed as the shopping cart with a number on it. 
+```
+<p class="text-white">{{ itemsInBasket }}</p>
+```
+The final challenge that I want to highlight is in deciding how to use the database models to show that an item is in a user's basket. I considered created an array of item ID's on a basket field within the user model but eventually settled on creating a basket field on each item which would contain the user ID.
+```
+class Item(models.Model):
+    name = models.CharField(max_length=50)
+    price = models.FloatField()
+    available = models.BooleanField(default=True)
+    size = models.CharField(max_length=50, default='')
+    image = models.CharField(max_length=500)
+    buyer = models.CharField(max_length=500, default='')
+    categories = models.ManyToManyField(
+        Category,
+        related_name='items',
+        blank=True
+    )
+    owner = models.ForeignKey(
+        User,
+        related_name='items',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    basket = models.ForeignKey(
+        User,
+        related_name='basket_items',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    purchased = models.ForeignKey(
+        User,
+        related_name='purchased_items',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
 
-[event bus code][remove from basket screenshot]
+    def __str__(self):
+        return f'Item {self.name}'
+```
+I found that this may have been a cleaner way of adding and removing each specific item from a user's basket, as I was able to filter through the items and look for a basket ID matching the ID of the currently logged in user in either the frontend or the backend. 
+```
+class BasketListView(APIView):
+    def get(self, request):
+        user = request.user
+        basket = Item.objects.all().filter(basket=user.id)
+        serializer = ItemSerializer(basket, many=True)
+        return Response(serializer.data)
+```
+```
+async getBasket() {
+  try {
+    const res = await axios.get("/api/basket");
+    this.items = res.data.filter(
+      item => item.basket === Auth.getPayload().sub
+        );
+  } catch (err) {
+    this.$router.push("/notfound");
+  }
+},
+```
 
-[code for basket field on item model with user ID, models.py]
 
 ## Reflections and Future Improvements
 
-Notes to be filled out:
-- add reviews
-- add filter by price
-- add auto complete component on search bar
+This project was a challenge for me and I'm happy that I have pushed my understanding of Vue. I really like this framework and I will aim to become more efficient with using it in the future. I think that Vuex will be the next aspect I aim to learn. 
+
+Specifically for this project, areas where I think I could add some more interesting functionality are:
+
+- adding user reviews so buyers and sellers can comment on their experiences.  
+- add a draggable filter by price bar
+- add an auto complete component on search bar
