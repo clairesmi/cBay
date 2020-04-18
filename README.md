@@ -96,13 +96,72 @@ They can post and edit items through the listing form.
 
 ## Challenges 
 
+One of the main challenges I faced working on the backend was enabling the user to edit their profile. Due to the fact that my user serializer was implementing a password check on sign up and login, I needed to use a different context to allow the user to be able to edit their profile without entering and confirming their password again. 
+
+So after doing some research and reading some of the Django documentation, I wrote the edit profile view as below, setting the context.
+
+```
+def put(self, request):
+        user = request.user
+
+        # set the context to edit so password & confirmation are not needed & set partial
+
+        # to true so that the user can edit their chose fields without editing every field on the object
+
+        updated_user = UserSerializer(user, data=request.data, context={'is_edit': True}, partial=True)
+        if updated_user.is_valid():
+            updated_user.save()
+            return Response(updated_user.data)
+        return Response(updated_user.errors, status=HTTP_422_UNPROCESSABLE_ENTITY)
+```
+
+I then wrote an if statement in the User serializer specifying what to do if the context is edit - return the data without doing the password check.
+
+```
+   def validate(self, data):
+        # if context is edit, do not require password & confirmation
+
+        if self.context['is_edit']:
+            return data
+```
+
+
+Another challenge I came across was understanding how to make the nav bar reactive, so that when the user logs in or adds something to their basket, the nav bar updates to show the new options available to the user after logging in, or the number of items in their basket.
+
+So after doing some research into how to achieve this in Vue, I decided to use the Event Bus functionality. 
+
+I exported a new Vue instance called eventBus which I created in my main.js file which is the route of the app that is mounted into the index.html file. 
+
+```
+export const eventBus = new Vue({
+  methods: {
+    loginCheck() {
+      this.$emit("userLoggedIn");
+    },
+    updateBasket() {
+      this.$emit("basketUpdated");
+    },
+    removeFromBasket() {
+      this.$emit("removedFromBasket");
+    },
+    calculateBasket(data) {
+      this.$emit("calculatedBasket", data);
+    },
+    emptyBasket() {
+      this.$emit("basketIsEmpty");
+    }
+  }
+});
+```
+I put my methods inside this Vue instance so that they can be used to emit certain events which can be listened out for by any of my other components. 
+
+The most complex method I created was the calculateBasket method.
+
 Snippets:
 
-[code for Django partial update]
+[event bus code][remove from basket screenshot]
 
-[event bus code]
-
-[code for basket field on item model with user ID]
+[code for basket field on item model with user ID, models.py]
 
 ## Reflections and Future Improvements
 

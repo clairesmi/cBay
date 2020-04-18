@@ -23,7 +23,7 @@ export const eventBus = new Vue({
       this.$emit("calculatedBasket", data);
     },
     emptyBasket() {
-      this.$emit('basketIsEmpty')
+      this.$emit("basketIsEmpty");
     }
   }
 });
