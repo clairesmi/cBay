@@ -11,6 +11,8 @@ from .serializers import ItemSerializer, PopulatedItemSerializer, CategorySerial
 
 class ItemListView(APIView):
 
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+
     def get(self, _request):
         items = Item.objects.all()
         serialized_items = PopulatedItemSerializer(items, many=True)
@@ -59,6 +61,7 @@ class CategoryDetailView(APIView):
         return Response(serialized_category.data)
 
 class BasketListView(APIView):
+
     def get(self, request):
         user = request.user
         print(user.id)
