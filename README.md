@@ -130,7 +130,7 @@ I then wrote an if statement in the User serializer specifying what to do if the
 
 Another challenge I came across was understanding how to make the nav bar reactive, so that when the user logs in or adds something to their basket, the nav bar updates to show the new options available to the user after logging in, or the number of items in their basket.
 
-So after doing some research into how to achieve this in Vue, I decided to use the Event Bus functionality. 
+ After looking into how to achieve this in Vue, I decided to use the Event Bus functionality. 
 
 I exported a new Vue instance called eventBus which I created in my main.js file which is the route of the app that is mounted into the index.html file. 
 
