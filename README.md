@@ -4,7 +4,7 @@
 
 I have recently started to learn how to use Vue, transferring my skills from React and learning about some of the differences between the two frameworks. I also wanted to practice using Django, specifically working with multiple models with related fields, so I set myself the task of creating a mock up of an online second hand clothes shop. I also decided to have a go with CSS Tailwind.
 
-[insert homepage image here]
+![Homepage screenshot](/readme-assets/homepage.png) 
 
 ## Deployment
 The project is deployed with Heroku and cn be found here: https://cbay-online.herokuapp.com/
@@ -84,7 +84,9 @@ In the nav bar, there is always the option for the user to go to their basket or
 
 The user also has the opportunity to edit their profile, specifically they can upload a profile image or they can update heir email address but they are not permitted to update their user name.  
 
-[insert screen shots of basket page and profile edit page]
+![User-profile screenshot](/readme-assets/profile-page.png) 
+
+![Basket screenshot](/readme-assets/basket.png) 
 
 ### Seller
 
@@ -92,7 +94,7 @@ From a selling perspective, the user always has the option to list a new item av
 
 They can post and edit items through the listing form.
 
-[insert listing form image here]
+![Listing-form screenshot](/readme-assets/listing-form.png)
 
 ## Challenges 
 
@@ -244,4 +246,4 @@ Specifically for this project, areas where I think I could add some more interes
 
 - adding user reviews so buyers and sellers can comment on their experiences.  
 - add a draggable filter by price bar
-- add an auto complete component on search bar
+- add an auto complete component on the search bar
