@@ -60,13 +60,13 @@ export default {
         return (this.item = { ...this.item, categories: [] });
       }
       this.item = { ...this.item, categories: updatedValue.map(val => val.id) };
-      console.log(this.item);
+      // console.log(this.item);
     },
 
     async handleSubmit() {
       try {
         await axios.post("/api/items", this.item);
-        console.log(this.item);
+        // console.log(this.item);
         this.$router.push("/profile");
       } catch (error) {
         this.$router.push("/notfound");
